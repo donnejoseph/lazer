@@ -154,3 +154,19 @@ WAGTAIL_SITE_NAME = "Laserzlat Site"
 LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Moscow'
 USE_TZ = True
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'HelloDjango' / 'templates'],  # Путь к шаблонам
+        'APP_DIRS': True,  # Это позволит Django искать шаблоны внутри каждого приложения
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
