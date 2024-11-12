@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-1iev2r+5(cwe=b1hnq(97gbdv0-sxuz%(+wd)s3$mptsbnfd75
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['laserzlat.tochkatbr.beget.tech']
-
+ALLOWED_HOSTS = ['laserzlat.tochkatbr.beget.tech', '127.0.0.1']
 
 # Application definition
 
@@ -37,6 +36,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Wagtail apps
+    'wagtail.admin',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.search',
+    'wagtail',
+    'modelcluster',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +87,7 @@ WSGI_APPLICATION = 'HelloDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',  # Для Beget: используй SQLite (по умолчанию) или подключи PostgreSQL
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -115,8 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = '/home/t/tochkatbr/laserzlat.tochkatbr.beget.tech/public_html/static'
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/t/tochkatbr/laserzlat.tochkatbr.beget.tech/public_html/static'  # Путь для статических файлов на Beget
+
+# Важно для локальной разработки
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Локальные статические файлы (если есть)
+]
+
+# Media files (для Wagtail)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Локальная папка для медиа файлов
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
