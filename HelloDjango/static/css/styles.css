@@ -1919,12 +1919,14 @@ footer {
 
 
 .info-container {
-  width: 100%;
-  background-image: url('/static/img/info-bg.png');
-  background-repeat: no-repeat;
-  margin-bottom: 90px;
+    margin-top: -20px;
+    background-repeat: no-repeat;
+    background-size: cover; /* Чтобы изображение растягивалось на весь контейнер */
+    height: 700px; /* Укажите подходящую для вашего дизайна высоту */
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }
-
 .info-title {
   color: #FFF;
   font-family: Metrika;
