@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'wagtail',
     'modelcluster',
     'taggit',
+    'mypages',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,13 @@ MEDIA_ROOT = BASE_DIR / 'media'  # Локальная папка для меди
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+WAGTAILADMIN_BASE_URL = os.getenv(
+    'WAGTAILADMIN_BASE_URL',  # Попробуем получить переменную из окружения
+    'http://127.0.0.1:8000' if DEBUG else 'https://laserzlat.tochkatbr.beget.tech'
+)
+
+WAGTAIL_SITE_NAME = "Laserzlat Site"
+LANGUAGE_CODE = 'ru'
+TIME_ZONE = 'Europe/Moscow'
+USE_TZ = True
