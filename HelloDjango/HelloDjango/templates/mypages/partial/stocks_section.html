@@ -1,0 +1,61 @@
+<!-- templates/partials/stocks_section.html -->
+<section class="stocks-section">
+    <div class="container">
+        <h2 class="stocks-title">акции</h2>
+    </div>
+    <div class="container stocks-container">
+        <div class="row stocks-row">
+            <div class="col-md-8 col-12">
+                <div class="row stocks-top-row">
+                    <div class="col-12">
+                        <h2>Весь ноябрь<br />скидка на разделочные доски</h2>
+                    </div>
+                </div>
+                <div class="row stocks-mid-row">
+                    <div class="col-12">
+                        <span class="stocks-text">
+                            Здесь описание акции — например при покупке комплекта из
+                            трех досок скидка 10% <br />
+                            и так далее. Ниже ссылка на товар/раздел
+                        </span>
+                    </div>
+                </div>
+                <div class="row stocks-bottom-row">
+                    <div class="col-12 col-md">
+                        <div class="stocks-input-1">
+                            <input class="form-control stocks-form-control-1" type="text" placeholder="Ваше Имя"
+                                aria-label="default input example" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md">
+                        <div class="stocks-input-2">
+                            <input class="form-control stocks-form-control-2" type="text" placeholder="Номер телефона"
+                                aria-label="default input example" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md d-flex justify-content-center align-items-center">
+                        <div class="form-check stocks-form-check d-flex align-items-center">
+                            <input class="form-check-input stocks-form-check-input me-2" type="checkbox" value=""
+                                id="flexCheckDefault" />
+                            <label class="form-check-label stocks-form-text" for="flexCheckDefault">
+                                Согласен на обработку
+                                <span class="stocks-span">персональных данных</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-primary stocks-button">
+                            Заказать
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="stocks-wrapper">
+                    <div class="stocks-yellow-square"></div>
+                    <img src="{{ '/static/img/stocks-image.png' }}" class="stocks-img" alt="Акции изображение" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

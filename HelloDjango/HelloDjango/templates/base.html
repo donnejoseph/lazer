@@ -83,6 +83,41 @@
     <!-- Main content -->
     <main>
         {% block content %}{% endblock %}
+        <section class="contacts-section">
+    <div class="container contacts-container">
+        <h2 class="contacts-title">контакты</h2>
+        <div class="row contacts-row">
+            <div class="col-md-8 map-col mb-4">
+                <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/11202/zlatoust/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Златоуст</a><a href="https://yandex.ru/maps/11202/zlatoust/house/ulitsa_svobody_8/YUAYcARkSE0DQFtvfX15dXxnbA==/?ll=59.634184%2C55.184048&utm_medium=mapframe&utm_source=maps&z=16" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Свободы, 8 на карте Златоуста — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?ll=59.634184%2C55.184048&mode=whatshere&whatshere%5Bpoint%5D=59.634184%2C55.184048&whatshere%5Bzoom%5D=17&z=16" width="856" height="250" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            </div>
+            <div class="col-md-4">
+                <span class="contacts-mini-title"> LazerZlat </span>
+
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/phone-img.png' }}" class="contacts-phone-png" alt="Телефон" />
+                    <span class="contacts-text"> +7 951 444 00 85 </span>
+                </div>
+
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/mail.png' }}" class="contacts-mail-png" alt="Email" />
+                    <span class="contacts-text"> lazerzlat@yandex.ru </span>
+                </div>
+
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/map-pin.png' }}" class="contacts-mail-png" alt="Адрес" />
+                    <span class="contacts-text">
+                        Челяб. область, г. Златоуст, ул. Свободы 8
+                    </span>
+                </div>
+
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/clock.png' }}" class="contacts-mail-png" alt="Время работы" />
+                    <span class="contacts-text"> Пн-пт: 9:00 — 18:00 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     </main>
     <!-- Footer -->
     <footer>
