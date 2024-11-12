@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'mypages',
+    'shop'
 ]
 
 MIDDLEWARE = [
