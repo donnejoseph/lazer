@@ -9,7 +9,7 @@
                 <!-- Галерея изображений товара -->
                 <div class="image-gallery d-flex flex-column">
                     {% for image in page.images.all %}
-                        <div class="gallery-item mb-2" onclick="changeMainImage('{{ image.image.url }}')">
+                        <div class="gallery-item" onclick="changeMainImage('{{ image.image.url }}')">
                             <img src="{{ image.image.url }}"
                                  class="tovars-card-mini-img"
                                  alt="Изображение {{ page.title }}">
@@ -104,7 +104,6 @@ function decreaseQuantity() {
 }
 
 .gallery-item {
-    flex: 1; /* Каждое изображение занимает равное пространство */
     margin: 0; /* Убираем отступ, чтобы миниатюры были равномерные */
 }
 
