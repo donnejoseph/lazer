@@ -11,7 +11,7 @@ class Command(BaseCommand):
     help = 'Create 20 new products with random data and existing images.'
 
     def handle(self, *args, **kwargs):
-        parent_page = Page.objects.get(id=5)  # Получаем страницу "Каталог"
+        parent_page = Page.objects.get(id=90)  # Получаем страницу "Каталог"
 
         all_images = list(Image.objects.all())
         print(all_images)

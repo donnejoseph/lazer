@@ -28,7 +28,7 @@ class CategoryPage(Page):
     def get_context(self, request):
         context = super().get_context(request)
         context['products'] = self.products.all()[:12]
-        context['best_sellers'] = self.products.filter(is_promotional=True)
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
         return context
 
 
@@ -63,6 +63,11 @@ class ProductPage(Page):
 
     def get_template(self, request, *args, **kwargs):
         return 'mypages/product_page.html'
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:18]
+        return context
 
     class Meta:
         verbose_name = "Товар"
