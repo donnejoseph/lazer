@@ -153,6 +153,10 @@ WAGTAILADMIN_BASE_URL = os.getenv(
 
 WAGTAIL_SITE_NAME = "Laserzlat Site"
 LANGUAGE_CODE = 'ru'
+LANGUAGES = [
+    ('ru', 'Русский'),  # Русский язык
+    ('en', 'English'),   # Английский язык (можно добавить или удалить другие языки по мере необходимости)
+]
 TIME_ZONE = 'Europe/Moscow'
 USE_TZ = True
 
@@ -171,3 +175,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+USE_I18N = True
+WAGTAIL_I18N_ENABLED = False  # Отключение интернационализации Wagtail Включите интернационализацию Wagtail

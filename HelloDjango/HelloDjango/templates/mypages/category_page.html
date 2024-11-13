@@ -17,124 +17,32 @@
 
 <section class="product-items-section-5">
     <div class="container">
-        <h2 class="product-items-title">Упаковка</h2>
+        <h2 class="product-items-title">С этим товаром покупают</h2>
         <div class="row product-items-top-row">
-            <!-- Первый продукт -->
-            <div class="col-md-4 col-12">
-                <div class="product-items">
-                    <img src="/img/menaj-yaizi-kulich.png" class="img-fluid" alt="ПОДСТАВКА ДЛЯ ЯИЦ И КУЛИЧА" />
-                    <h4 class="mb-4">ПОДСТАВКА ДЛЯ ЯИЦ И КУЛИЧА</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">980 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Второй продукт -->
-            <div class="col-md-4 col-12">
-                <div class="product-items">
-                    <img src="/img/podnos-oval.png" class="img-fluid" alt="ПОДНОС “ОВАЛ”" />
-                    <h4 class="mb-4">ПОДНОС “ОВАЛ”</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">1 930 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
+            {% for product in products %}
+                <div class="col-md-4 col-12">
+                    <div class="product-items">
+                        {% if product.images.first %}
+                            <img src="{{ product.images.first.image.url }}" class="img-fluid" alt="{{ product.title }}" />
+                        {% endif %}
+                        <h4 class="mb-4">{{ product.title }}</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="carousel-price">{{ product.price }} р.</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Третий продукт -->
-            <div class="col-md-4 col-12">
-                <div class="product-items">
-                    <img src="/img/doska-dragon.png" class="img-fluid" alt="“ШОТНИЦА С ГРАВИРОВКОЙ” СЕРВИРОВОЧНАЯ ДОСКА" />
-                    <h4 class="mb-4">“ШОТНИЦА С ГРАВИРОВКОЙ” СЕРВИРОВОЧНАЯ ДОСКА ДЛЯ ШОТОВ</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">990 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Четвертый продукт -->
-            <div class="col-md-4 col-12">
-                <div class="product-items">
-                    <img src="/img/podstavka-yaiz-2.png" class="img-fluid" alt="ПОДСТАВКА ДЛЯ ЯИЦ И КУЛИЧА" />
-                    <h4 class="mb-4">ПОДСТАВКА ДЛЯ ЯИЦ И КУЛИЧА</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">980 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Пятый продукт -->
-            <div class="col-md-4 col-12">
-                <div class="product-items">
-                    <img src="/img/pivniza-1.png" class="img-fluid" alt="ДЕРЕВЯННЫЙ ЯЩИК ДЛЯ ПИВА “ПИВНИЦА”" />
-                    <h4 class="mb-4">ДЕРЕВЯННЫЙ ЯЩИК ДЛЯ ПИВА “ПИВНИЦА” ПОДАРОЧНЫЙ, ДЕКОРАТИВНЫЙ</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">3 380 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Дополнительный ряд продуктов -->
-        <div class="row justify-content-start">
-            <!-- Шестой продукт -->
-            <div class="col-md-6 col-12 product-bottom-col">
-                <div class="product-items">
-                    <img src="/img/pivniza-2.png" class="img-fluid" alt="ДЕРЕВЯННЫЙ ЯЩИК ДЛЯ ПИВА “ПИВНИЦА”" />
-                    <h4 class="mb-4">ДЕРЕВЯННЫЙ ЯЩИК ДЛЯ ПИВА “ПИВНИЦА”</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">3 380 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Седьмой продукт -->
-            <div class="col-md-6 col-12 product-bottom-col">
-                <div class="product-items">
-                    <img src="/img/kluzniza.png" class="img-fluid" alt="КЛЮЧНИЦА НАСТЕННАЯ “ДОМ”" />
-                    <h4 class="mb-4">КЛЮЧНИЦА НАСТЕННАЯ “ДОМ”</h4>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="carousel-price">580 р.</span>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+                <p>Нет товаров для отображения.</p>
+            {% endfor %}
         </div>
     </div>
 </section>
+
+
 {% include 'mypages/partial/contacts_section.html' %}
 {% endblock %}

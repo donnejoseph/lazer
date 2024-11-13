@@ -25,6 +25,12 @@ class CategoryPage(Page):
     def get_template(self, request, *args, **kwargs):
         return 'mypages/category_page.html'
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['products'] = self.products.all()[:6]
+        context['best_sellers'] = self.products.filter(is_promotional=True)
+        return context
+
 
 
     class Meta:
