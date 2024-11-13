@@ -27,7 +27,7 @@ class CategoryPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['products'] = self.products.all()[:6]
+        context['products'] = self.products.all()[:12]
         context['best_sellers'] = self.products.filter(is_promotional=True)
         return context
 

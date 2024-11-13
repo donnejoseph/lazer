@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}  <!-- Загружаем необходимые теги -->
 {% block content %}
     {% if page.image %}
         {% image page.image width-800 as my_image %}  <!-- Используем длину ширины -->
@@ -15,34 +15,39 @@
         </div>
     </section>
 
-<section class="product-items-section-5">
-    <div class="container">
-        <h2 class="product-items-title">С этим товаром покупают</h2>
-        <div class="row product-items-top-row">
-            {% for product in products %}
-                <div class="col-md-4 col-12">
-                    <div class="product-items">
-                        {% if product.images.first %}
-                            <img src="{{ product.images.first.image.url }}" class="img-fluid" alt="{{ product.title }}" />
-                        {% endif %}
-                        <h4 class="mb-4">{{ product.title }}</h4>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="carousel-price">{{ product.price }} р.</span>
-                            </div>
-                            <div class="col-6 text-end">
-                                <button type="button" class="btn carousel-button-buy">КУПИТЬ</button>
+    <section class="product-items-section-5">
+        <div class="container">
+            <h2 class="product-items-title">{{ page.title }}</h2>
+            <div class="row product-items-top-row">
+                {% for product in products %}
+                    <div class="col-md-3 col-12">
+                        <div class="product-items">
+                            {% if product.images.first %}
+                                <img src="{{ product.images.first.image.url }}" class="img-fluid" alt="{{ product.title }}" />
+                            {% endif %}
+                            <h4 class="mb-4">
+                                <!-- Ссылка на страницу товара -->
+                               {{ product.title }}
+                            </h4>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="carousel-price">{{ product.price }} р.</span>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <!-- Оборачиваем кнопку в ссылку -->
+                                    <a href="{% pageurl product %}" class="btn carousel-button-buy">КУПИТЬ</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% empty %}
-                <p>Нет товаров для отображения.</p>
-            {% endfor %}
+                {% empty %}
+                    <p>Нет товаров для отображения.</p>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-
-{% include 'mypages/partial/contacts_section.html' %}
+    {% include 'mypages/partial/best_seller_section.html' %}
+    {% include 'mypages/partial/stocks_section.html' %}
+    {% include 'mypages/partial/contacts_section.html' %}
 {% endblock %}
