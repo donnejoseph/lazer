@@ -6,7 +6,7 @@ from shop.models import ProductPage
 
 
 class HomePage(Page):
-    intro = RichTextField(blank=True)  # Поле для текста на главной странице
+    intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
@@ -14,13 +14,59 @@ class HomePage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # Получаем товары, которые являются хитами продаж (is_promotional=True)
         context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
+        context['home_page'] = self
+        context['catalog_page'] = CatalogPage.objects.first() or None
+        context['opt_page'] = OptPage.objects.first() or None
+        context['about_page'] = AboutPage.objects.first() or None
         return context
 
-class AboutPage(Page):
-    intro = RichTextField(blank=True)  # Поле для ввода текста
+
+class CatalogPage(Page):
+    intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
     ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
+        context['home_page'] = HomePage.objects.first()  # Получаем страницу главной
+        context['catalog_page'] = self
+        context['opt_page'] = OptPage.objects.first()
+        context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
+        return context
+
+
+class OptPage(Page):
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
+        context['home_page'] = HomePage.objects.first()  # Получаем страницу главной
+        context['catalog_page'] = CatalogPage.objects.first()  # Получаем страницу каталога
+        context['opt_page'] = self
+        context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
+        return context
+
+
+class AboutPage(Page):
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['home_page'] = HomePage.objects.first()  # Получаем страницу главной
+        context['catalog_page'] = CatalogPage.objects.first()  # Получаем страницу каталога
+        context['opt_page'] = OptPage.objects.first()
+        context['about_page'] = self
+        return context
