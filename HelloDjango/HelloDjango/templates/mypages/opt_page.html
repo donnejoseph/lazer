@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags %}  <!-- Загружаем необходимые теги -->
+{% block content %}
+    {% if page.image %}
+        {% image page.image width-800 as my_image %}  <!-- Используем длину ширины -->
+    {% endif %}
+    {% include 'mypages/partial/best_seller_section.html' %}
+    {% include 'mypages/partial/stocks_section.html' %}
+    {% include 'mypages/partial/contacts_section.html' %}
+{% endblock %}

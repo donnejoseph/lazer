@@ -1628,17 +1628,25 @@ footer {
 }
 
 .contacts-2-form {
-  background-image: url('/static/img/contacts-bg.png');
+  background-image: url('/static/img/contacts-2-form-bg.png');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   width: 100%;
   margin-bottom: 77px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contacts-from-div{
+}
+.form-control{
+    border-radius: 0px;
 }
 
 .contacts-2-form-text-1 {
   padding-top: 38px;
   display: block;
-  margin-left: 150px;
   color:  #CE8A37;
   font-family: Metrika;
   font-size: 24px;
@@ -1649,7 +1657,6 @@ footer {
 
 .contacts-2-form-text-2 {
   display: block;
-  margin-left: 150px;
   padding-bottom: 26px;
   color:  #FFF;
   font-family: Arsenal;
@@ -1662,7 +1669,6 @@ footer {
 .contacts-input-1 {
   font-size: 10px;
   width: 360px;
-  margin-left: 150px;
   border-radius: 0px;
   border: 1px solid #708759;
   background: #FFF;
@@ -1676,7 +1682,6 @@ footer {
 .contacts-input-2 {
   font-size: 10px;
   width: 360px;
-  margin-left: 150px;
   border-radius: 0px;
   border: 1px solid #708759;
   background: #FFF;
@@ -1687,7 +1692,6 @@ footer {
 }
 
 .contacts-form-check {
-  margin-left: 150px;
   margin-top: 14px;
 }
 
@@ -1712,7 +1716,7 @@ footer {
 .contacts-2-button {
   margin-top: 31px;
   margin-bottom: 42px;
-  margin-left: 150px;
+
   border-radius: 0px;
   width: 360px;
   height: 100%;

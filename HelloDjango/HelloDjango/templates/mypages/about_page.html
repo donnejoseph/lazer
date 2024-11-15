@@ -1,14 +1,80 @@
-<!-- mypages/templates/mypages/about_page.html -->
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page.title }}</title>
-</head>
-<body>
-    <h1>{{ page.title }}</h1>
-    <div>
-        {{ page.intro|richtext }}
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags %}
+{% block content %}
+<section class="contacts-section-2">
+    <div class="container">
+        <h2 class="contacts-title-2">контакты</h2>
+        <div class="row">
+            <div class="col-md-5">
+                <span class="contacts-mini-title-2"> Вы можете связаться с нами любым удобным для вас способом:
+                    заполнить форму, написать на почту или позвонить нам. </span>
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/map-pin.png' }}" class="contacts-mail-png" alt="Map Pin" />
+                    <span class="contacts-text-2">
+                        Челяб. область, г. Златоуст, ул. Свободы 8
+                    </span>
+                </div>
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/clock.png' }}" class="contacts-mail-png" alt="" />
+                    <span class="contacts-text-2"> Пн-пт: 9:00 — 18:00 </span>
+                </div>
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/phone-img.png '}}" class="contacts-phone-png" alt="" />
+                    <span class="contacts-text-2"> +7 951 444 00 85 </span>
+                </div>
+                <div class="contacts-box-2">
+                    <img src="{{ '/static/img/mail.png'}}" class="contacts-mail-png" alt="" />
+                    <span class="contacts-text-2"> lazerzlat@yandex.ru </span>
+                </div>
+                <span class="contacts-mini-title-2"> Оставайтесь в курсе последних новостей, акций и новинок —
+                    подписывайтесь на нас в социальных сетях. </span>
+                <div class="icons">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M17.8192 3C23.5516 3 24 3.44835 24 9.18083V17.8187C24 23.5511 23.5516 24 17.8192 24H9.18083C3.44835 24 3 23.5511 3 17.8192V9.18083C3 3.44835 3.44835 3 9.18083 3H17.8192ZM19.7218 17.5908C20.1014 17.5908 20.7266 17.5283 20.251 16.7361C20.2111 16.6705 19.9738 16.1507 18.823 15.0813C17.8428 14.1678 17.8932 14.0675 19.1858 12.1712C20.2216 10.6513 20.377 10.3741 20.2987 10.1206C20.2263 9.88695 20.1376 9.79612 19.6005 9.79612C19.1343 9.79612 17.9704 9.7662 17.5939 9.7662C17.0254 9.7662 16.944 10.1836 16.1444 11.809C15.4976 13.1236 15.1637 13.5157 14.8818 13.5157C14.56 13.5157 14.3899 13.1803 14.3899 11.9297C14.3899 10.1531 14.4744 9.40868 12.9125 9.40868C10.7285 9.40868 10.6282 9.92107 10.8881 10.046C11.2105 10.2004 11.6509 10.3878 11.6509 11.3013C11.6509 12.6395 11.6588 13.4312 11.2729 13.4312C10.8871 13.4312 10.6844 13.2506 9.85807 11.7449C8.88472 9.97147 8.88997 9.76672 8.20327 9.76672C7.64887 9.76672 6.89708 9.76672 6.4083 9.76672C6.0513 9.76672 5.94893 10.0576 6.03818 10.2723C6.15158 10.5442 7.76543 14.1961 9.46695 15.9202C11.1685 17.6444 12.9067 17.5918 13.1608 17.5918C13.2412 17.5918 13.531 17.5918 13.6354 17.5918C14.1683 17.5918 14.3589 17.2879 14.4046 17.0411C14.5589 16.2079 14.6088 15.716 14.9359 15.716C15.2483 15.716 15.4404 15.9092 16.8463 17.3257C17.0196 17.5 17.1713 17.5918 17.6286 17.5918C18.0874 17.5908 19.3422 17.5908 19.7218 17.5908Z" fill="#708759" />
+                    </svg>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M8.83333 3C5.61217 3 3 5.61217 3 8.83333V18.1667C3 21.3878 5.61217 24 8.83333 24H18.1667C21.3878 24 24 21.3878 24 18.1667V8.83333C24 5.61217 21.3878 3 18.1667 3H8.83333ZM20.5 5.33333C21.144 5.33333 21.6667 5.856 21.6667 6.5C21.6667 7.144 21.144 7.66667 20.5 7.66667C19.856 7.66667 19.3333 7.144 19.3333 6.5C19.3333 5.856 19.856 5.33333 20.5 5.33333ZM13.5 7.66667C16.7212 7.66667 19.3333 10.2788 19.3333 13.5C19.3333 16.7212 16.7212 19.3333 13.5 19.3333C10.2788 19.3333 7.66667 16.7212 7.66667 13.5C7.66667 10.2788 10.2788 7.66667 13.5 7.66667ZM13.5 10C11.567 10 10 11.567 10 13.5C10 15.433 11.567 17 13.5 17C15.433 17 17 15.433 17 13.5C17 11.567 15.433 10 13.5 10Z" fill="#708759" />
+                    </svg>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="36" height="28" viewBox="0 0 36 28" fill="none">
+                        <path d="M31.4544 4.89188C32.8213 6.29813 33 8.5325 33 14C33 19.4675 32.8213 21.7019 31.4544 23.1081C30.0875 24.5138 28.6637 24.625 18 24.625C7.33625 24.625 5.9125 24.5138 4.54562 23.1081C3.17875 21.7019 3 19.4675 3 14C3 8.5325 3.17875 6.29813 4.54562 4.89188C5.9125 3.48563 7.33625 3.375 18 3.375C28.6637 3.375 30.0875 3.48625 31.4544 4.89188ZM15.4688 18.6356L23.06 14.2369L15.4688 9.90688V18.6356Z" fill="#708759" />
+                    </svg>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="contacts-2-form">
+                    <div class="contacts-from-div">
+                        <span class="contacts-2-form-text-1">
+                        Оставьте заявку
+                    </span>
+                    <span class="contacts-2-form-text-2">
+                        И мы вам обязательно перезвоним
+                    </span>
+                    <div class="contacts-input-1">
+                        <input class="form-control contacts-form-control-1" type="text" placeholder="Ваше Имя" aria-label="default input example" />
+                    </div>
+                    <div class="contacts-input-2">
+                        <input class="form-control contacts-form-control-2" type="text" placeholder="Номер Телефона" aria-label="default input example" />
+                    </div>
+                    <div class="form-check contacts-form-check d-flex align-items-center">
+                        <input class="form-check-input stocks-form-check-input me-2" type="checkbox" value="" id="flexCheckDefault" />
+                        <label class="form-check-label contacts-2-form-text" for="flexCheckDefault">
+                            Согласен на обработку
+                            <span class="contacts-2-span">персональных данных</span>
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-primary contacts-2-button">
+                        отправить заявку
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 mb-5">
+                <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/11202/zlatoust/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Златоуст</a><a href="https://yandex.ru/maps/11202/zlatoust/house/ulitsa_svobody_8/YUAYcARkSE0DQFtvfX15dXxnbA==/?ll=59.634184%2C55.184048&utm_medium=mapframe&utm_source=maps&z=16" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Свободы, 8 на карте Златоуста — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?ll=59.634184%2C55.184048&mode=whatshere&whatshere%5Bpoint%5D=59.634184%2C55.184048&whatshere%5Bzoom%5D=17&z=16" width="100%" height="273" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</section>
+</div>
+{% endblock %}
