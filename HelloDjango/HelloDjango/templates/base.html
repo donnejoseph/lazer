@@ -56,10 +56,13 @@
                                         <a class="nav-link" href="{% if catalog_page %}{% pageurl catalog_page %}{% else %}/catalog/{% endif %}">Каталог</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% if opt_page %}{% pageurl opt_page %}{% else %}/opt/{% endif %}">Оптовикам</a>
+                                        <a class="nav-link" href="{% if opt_page %}{% pageurl opt_page %}{% else %}/optovikam/{% endif %}">Оптовикам</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% if opt_page %}{% pageurl about_page %}{% else %}/opt/{% endif %}">Контакты</a>
+                                        <a class="nav-link" href="{% if opt_page %}{% pageurl news_page %}{% else %}/news/{% endif %}">Новости</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% if opt_page %}{% pageurl about_page %}{% else %}/contacts/{% endif %}">Контакты</a>
                                     </li>
                                 </ul>
 
