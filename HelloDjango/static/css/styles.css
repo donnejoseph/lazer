@@ -850,21 +850,102 @@ body {
   background-color: #708759 !important;
 }
 
-
+/* --owl-carousel-- */
 .owl-carousel .item {
-  height: auto;
+  min-height: 264px; /* Фиксированная высота элементов */
   background-color: #fff;
-  padding: 14px;
+  padding: 10px;
+  padding-bottom: 14px;
   text-align: center;
+  display: flex; /* Flexbox для вертикального выравнивания содержимого */
+  flex-direction: column;
+  align-items: stretch; /* Элементы растягиваются по ширине карточки */
+  justify-content: space-between; /* Равномерное распределение по вертикали */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.item h4 {
-  color: #313131;
-  font-family: "Lora", serif;
-  font-size: 20px;
-  font-weight: 400;
-  margin-top: 14px;
+/* Изображение прижато к верху */
+.owl-carousel .item img {
+  height: 172px; /* Устанавливаем фиксированную высоту изображения */
+  width: 100%; /* Изображение растягивается по ширине карточки */
+  object-fit: cover; /* Масштабируем изображение с обрезкой */
+  margin: 0; /* Убираем отступы */
+  align-self: flex-start; /* Прижимаем изображение к верхнему краю */
 }
+
+/* Заголовок */
+.item h4 {
+  margin: 10px 0 0;
+  text-align: center;
+  flex-shrink: 0; /* Заголовок не сжимается */
+}
+
+/* Контейнер для цены и кнопки */
+.item .row {
+  margin-top: auto; /* Закрепляем блок внизу */
+  display: flex; /* Flexbox для горизонтального расположения */
+  justify-content: space-between; /* Располагаем элементы по краям */
+  align-items: center; /* Центрируем элементы по вертикали */
+  width: 100%; /* Растягиваем контейнер на всю ширину */
+}
+
+/* Используем ваши стили цены */
+.item .row .carousel-price {
+  /* Ваши оригинальные стили */
+}
+
+/* Используем ваши стили кнопки */
+.item .row .carousel-button-buy {
+  /* Ваши оригинальные стили */
+}
+
+/* Стрелки навигации */
+.owl-nav {
+  position: absolute;
+  top: 40%; /* Центрируем стрелки по вертикали */
+  width: 100%; /* Растягиваем контейнер навигации */
+  display: flex;
+  justify-content: space-between; /* Размещаем стрелки по краям */
+  transform: translateY(-50%); /* Смещение для точного центрирования */
+  pointer-events: none; /* Чтобы клики проходили только по кнопкам */
+
+}
+
+/* Стили кнопок стрелок */
+.owl-nav .owl-prev,
+.owl-nav .owl-next {
+  background-color: transparent; /* Убираем фон */
+  color: #708759 !important; /* Цвет стрелок */
+  border: none; /* Убираем рамку */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto; /* Включаем клики */
+  cursor: pointer;
+  font-size: 24px; /* Размер стрелок */
+}
+
+/* Убираем фокусный стиль */
+.owl-nav .owl-prev:focus,
+.owl-nav .owl-next:focus {
+  outline: none;
+}
+
+/* Расположение стрелок */
+.owl-nav .owl-prev {
+  position: absolute;
+  left: -40px; /* Смещение влево за пределы карусели */
+}
+
+.owl-nav .owl-next {
+  position: absolute;
+  right: -20px; /* Смещение вправо за пределы карусели */
+}
+/* --owl-carousel-end- */
+
 
 .about-us-section {
   background-image: url('/static/img/bestsellers-bg.png');
@@ -1204,47 +1285,76 @@ footer {
   margin-bottom: 120px;
 }
 
+
+/*--Карточка товара в листинге --*/
+
 .product-items-section-5 {
   margin-bottom: 120px;
 }
 
+/* Заголовок секции товаров */
 .product-items-title {
   padding-top: 60px;
   margin-bottom: 40px;
-  color: #708759;
-  font-family: Metrika;
+  color: #708759; /* Зелёный цвет заголовка */
+  font-family: Metrika, sans-serif;
   font-size: 36px;
   font-style: normal;
   font-weight: 400;
   line-height: 97%;
   text-transform: uppercase;
-}
-
-.product-items h4 {
-  color: #313131;
-  font-family: "Lora", serif;
-  font-size: 14px;
-  font-weight: 400;
-  margin-top: 10px;
-
-}
-
-.product-items {
-  width: 100%;
-  height: auto;
-  background-color: #fff;
-  padding: 20px;
   text-align: center;
 }
 
+/* Карточка товара */
 .product-items {
-  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 10px;
+  padding-bottom: 14px;
+  text-align: center;
+  display: flex; /* Flexbox для выравнивания содержимого */
+  flex-direction: column;
+  align-items: stretch; /* Растягиваем элементы по ширине карточки */
+  justify-content: space-between; /* Равномерное распределение содержимого */
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 264px; /* Фиксированная высота карточки */
+  margin: 0px -15px;
 }
 
-.product-items {
-  margin-bottom: 20px;
+/* Обёртка карточки */
+.prod-card {
+  flex: 0 0 calc(20% - 20px); /* Задаём ширину карточки с учётом отступов */
+  max-width: calc(20% - 20px); /* Ограничиваем ширину карточки */
+  display: flex;
+  flex-direction: column;
+  margin: 10px; /* Отступ между карточками */
+  box-sizing: border-box;
 }
 
+/* Изображение в карточке */
+.prod-card img {
+  width: 100%; /* Изображение растягивается по ширине карточки */
+  height: 150px; /* Фиксированная высота изображения */
+  object-fit: cover; /* Масштабируем изображение с обрезкой */
+  margin-bottom: 10px; /* Отступ снизу для изображения */
+}
+
+/* Заголовок товара */
+.product-items h4 {
+  color: #313131; /* Цвет текста */
+  font-family: "Lora", serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  flex-shrink: 0; /* Предотвращаем сжатие текста */
+  line-height: 1.2; /* Лимитируем высоту текста */
+  overflow: hidden; /* Обрезаем текст, если его слишком много */
+}
+
+/* Кнопка товара */
 .product-items-button {
   width: 260px;
   height: 34px;
@@ -1253,8 +1363,12 @@ footer {
   border-radius: 0;
   color: white;
   transition: background-color 0.3s, color 0.3s;
-  margin-bottom: 60px;
+  margin-bottom: 10px; /* Уменьшённый отступ снизу */
+  align-self: center; /* Центрируем кнопку внутри карточки */
 }
+/*--Карточка товара в листинге --*/
+
+
 
 .product-items-button:hover,
 .product-items-button:focus,
@@ -1584,9 +1698,6 @@ footer {
 .news-bottom-row {
   margin-bottom: 95px;
 }
-
-
-
 
 
 
@@ -2118,8 +2229,6 @@ footer {
   line-height: 97%;
   text-transform: uppercase;
 }
-
-
 
 .best-sellers-section-tovars-card {
   margin-bottom: 60px;

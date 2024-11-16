@@ -4,6 +4,8 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from modelcluster.fields import ParentalKey
 
+
+
 class CategoryPage(Page):
     description = RichTextField(blank=True, verbose_name="Описание категории")
     image = models.ForeignKey(
@@ -30,8 +32,6 @@ class CategoryPage(Page):
         context['products'] = self.products.all()[:12]
         context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
         return context
-
-
 
     class Meta:
         verbose_name = "Категория"
