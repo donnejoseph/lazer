@@ -29,47 +29,50 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         parent_page = Page.objects.get(id=random.choice([90, 89, 88, 5]))
+        cat = CategoryPage.objects.all()
+        for c in cat:
+            print(c)
 
-        all_images = list(Image.objects.all())
-        print(all_images)
-
-        if not all_images:
-            self.stderr.write("Нет изображений для создания продуктов.")
-            return
-
-        for i in range(1, 200):  # Создаем 200 новых продуктов
-            # Создаем новый продукт
-            product_copy = ProductPage(
-                title=random.choice(["менажница", "доска", "поднос", "подставка", "подарочный набор", "подарочная коробка"]),  # Случайное название
-                description="Описание тестового товара",  # Пример описания
-                price=random.randint(1000, 10000),  # Случайная цена от 100 до 10,000
-                is_promotional=random.choice([True, False]),  # Случайный флаг акционного товара
-                category=random.choice([CategoryPage.objects.first()])  # Выбор случайной категории
-            )
-
-            # Генерация slug на английском (транслитерируем название товара)
-            english_slug = transliterate(product_copy.title).lower() + f'-{i}'  # Добавляем уникальный номер
-            product_copy.slug = re.sub(r'\W+', '-', english_slug)  # Убираем все специальные символы и пробелы
-
-            # Добавляем продукт в родительскую страницу
-            if parent_page:
-                product_copy = parent_page.add_child(instance=product_copy)  # Добавляем как дочерний элемент
-
-            product_copy.save()  # Сохраняем новый продукт
-
-            # Выбираем случайное изображение для нового товара
-            selected_image = random.choice(all_images)  # Выбираем случайное изображение
-
-            # Создаем связь с новым товаром
-            product_image = ProductImage(
-                product=product_copy,
-                image=selected_image.file,  # Важно: используем `selected_image.file`, а не сам объект Image
-                is_main=True  # Устанавливаем его основным изображением
-            )
-
-            product_image.save()  # Сохраняем изображение для товара
-
-            self.stdout.write(f'Создан товар: {product_copy.title} с slug: {product_copy.slug}')
-            print(f'Категория: {product_copy.category}')  # Выводим информацию о созданном товаре
-
-        self.stdout.write(self.style.SUCCESS("200 новых тестовых товаров успешно созданы."))
+        # all_images = list(Image.objects.all())
+        # print(all_images)
+        #
+        # if not all_images:
+        #     self.stderr.write("Нет изображений для создания продуктов.")
+        #     return
+        #
+        # for i in range(1, 200):  # Создаем 200 новых продуктов
+        #     # Создаем новый продукт
+        #     product_copy = ProductPage(
+        #         title=random.choice(["менажница", "доска", "поднос", "подставка", "подарочный набор", "подарочная коробка"]),  # Случайное название
+        #         description="Описание тестового товара",  # Пример описания
+        #         price=random.randint(1000, 10000),  # Случайная цена от 100 до 10,000
+        #         is_promotional=random.choice([True, False]),  # Случайный флаг акционного товара
+        #         category=random.choice([CategoryPage.objects.first()])  # Выбор случайной категории
+        #     )
+        #
+        #     # Генерация slug на английском (транслитерируем название товара)
+        #     english_slug = transliterate(product_copy.title).lower() + f'-{i}'  # Добавляем уникальный номер
+        #     product_copy.slug = re.sub(r'\W+', '-', english_slug)  # Убираем все специальные символы и пробелы
+        #
+        #     # Добавляем продукт в родительскую страницу
+        #     if parent_page:
+        #         product_copy = parent_page.add_child(instance=product_copy)  # Добавляем как дочерний элемент
+        #
+        #     product_copy.save()  # Сохраняем новый продукт
+        #
+        #     # Выбираем случайное изображение для нового товара
+        #     selected_image = random.choice(all_images)  # Выбираем случайное изображение
+        #
+        #     # Создаем связь с новым товаром
+        #     product_image = ProductImage(
+        #         product=product_copy,
+        #         image=selected_image.file,  # Важно: используем `selected_image.file`, а не сам объект Image
+        #         is_main=True  # Устанавливаем его основным изображением
+        #     )
+        #
+        #     product_image.save()  # Сохраняем изображение для товара
+        #
+        #     self.stdout.write(f'Создан товар: {product_copy.title} с slug: {product_copy.slug}')
+        #     print(f'Категория: {product_copy.category}')  # Выводим информацию о созданном товаре
+        #
+        # self.stdout.write(self.style.SUCCESS("200 новых тестовых товаров успешно созданы."))

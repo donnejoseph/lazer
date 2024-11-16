@@ -1,0 +1,32 @@
+<section class="product-items-section-5">
+    <div class="container">
+        <h2 class="product-items-title">{{ page.title }}</h2>
+        <div class="row product-items-top-row justify-content-between">
+            {% for product in manej %}
+            <div class="col-lg-2 col-md-4 col-6 prod-card">
+                <!-- Bootstrap классы для 5 колонок -->
+                <div class="product-items">
+                    {% if product.images.first %}
+                    <img src="{{ product.images.first.image.url }}" class="img-fluid" alt="{{ product.title }}" />
+                    {% endif %}
+                    <h4 class="mb-4">
+                        <!-- Ссылка на страницу товара -->
+                        {{ product.title }}
+                    </h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="carousel-price">{{ product.price }} р.</span>
+                        </div>
+                        <div class="col-6 text-end">
+                            <!-- Оборачиваем кнопку в ссылку -->
+                            <a href="{% pageurl product %}" class="btn carousel-button-buy">КУПИТЬ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>Нет товаров для отображения.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
