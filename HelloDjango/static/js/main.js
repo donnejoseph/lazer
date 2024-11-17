@@ -12,7 +12,7 @@ $(document).ready(function(){
       1000: { items: 5 }
     }
   });
-  
+
   // Универсальная функция для добавления событий к видео и кнопке
   function setupVideoControls(videoElement, playButtonElement) {
     if (videoElement && playButtonElement) {
@@ -70,5 +70,28 @@ function decreaseQuantity() {
     quantityInput.value = quantity;
     updateTotalPrice(quantity);
   }
+
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+        const showMoreButton = document.getElementById("show-more-button");
+        const hiddenItems = document.querySelectorAll(".product-item.d-none");
+        const itemsPerClick = 10;
+
+        showMoreButton.addEventListener("click", function () {
+            let shownCount = 0;
+
+            hiddenItems.forEach(item => {
+                if (shownCount < itemsPerClick && item.classList.contains("d-none")) {
+                    item.classList.remove("d-none"); // Показываем скрытые элементы
+                    shownCount++;
+                }
+            });
+
+            // Если больше нечего показывать, скрываем кнопку
+            if (document.querySelectorAll(".product-item.d-none").length === 0) {
+                showMoreButton.style.display = "none";
+            }
+        });
+    });
 

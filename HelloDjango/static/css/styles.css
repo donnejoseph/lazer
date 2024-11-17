@@ -1370,6 +1370,32 @@ footer {
   align-self: center; /* Центрируем кнопку внутри карточки */
 }
 
+.btn-show-more {
+    background-color: #708759;
+    color: #FFF;
+    text-align: center;
+    font-family: Metrika;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 97%;
+    border-radius: 0px;
+    padding: 10px 20px; /* Пространство вокруг текста */
+    border: none; /* Убираем стандартную рамку */
+    display: inline-flex; /* Используем flexbox для выравнивания */
+    align-items: center; /* Центрируем текст и иконку по вертикали */
+    gap: 8px; /* Пространство между текстом и галочкой */
+    cursor: pointer; /* Добавляем указатель при наведении */
+}
+.btn-show-more:hover {
+    background-color: #708759; /* Цвет фона при наведении */
+    color: #FFF; /* Цвет текста при наведении */
+}
+
+.chevron {
+    font-size: 12px; /* Размер галочки */
+    color: #FFF; /* Цвет галочки */
+}
 
 
 
