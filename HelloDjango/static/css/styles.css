@@ -1936,6 +1936,8 @@ footer {
   text-transform: uppercase;
 }
 
+
+
 .korzina-tovar-img {
   width: 100%;
 }
@@ -2140,6 +2142,46 @@ footer {
 
 .tovar-choose-menaj-bottom-col {
   width: 20% ;
+}
+
+.tovar-description{
+    padding-bottom: 140px;
+ }
+.tovars-card-img {
+    width: 100%; /* Полная ширина */
+    height: 440px; /* Фиксированная высота для главного изображения */
+    object-fit: cover; /* Масштабирует изображение, сохраняя пропорции, и обрезает, если нужно */
+    object-position: center; /* Центрирует изображение внутри области */
+    border: 1px solid #ddd; /* Добавляем рамку для эстетики */
+    border-radius: 0px; /* Добавляем закругленные углы */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Добавляем легкую тень */
+}
+
+.tovars-card-mini-img {
+    width: 100%; /* Полная ширина для миниатюр */
+    height: 80px; /* Фиксированная высота для миниатюр */
+    object-fit: cover; /* Масштабирует изображение, сохраняя пропорции, и обрезает, если нужно */
+    object-position: center; /* Центрирует изображение внутри области */
+    border: 1px solid #ddd; /* Рамка для миниатюр */
+    border-radius: 0px; /* Закругленные углы для миниатюр */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для миниатюр */
+}
+
+.image-gallery {
+    height: 100%; /* Высота галереи */
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание миниатюр */
+    justify-content: space-between; /* Увеличиваем пространство между верхней и нижней миниатюрами */
+}
+
+.gallery-item {
+    margin: 0; /* Убираем отступы между миниатюрами */
+    cursor: pointer; /* Добавляем указатель при наведении на миниатюру */
+    transition: transform 0.2s ease; /* Анимация при наведении */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Увеличение изображения при наведении */
 }
 
 .tovars-card-mini-img {

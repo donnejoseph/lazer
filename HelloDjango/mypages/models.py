@@ -72,7 +72,7 @@ class OptPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:10]
         context['home_page'] = HomePage.objects.first()  # Получаем страницу главной
         context['catalog_page'] = CatalogPage.objects.first()  # Получаем страницу каталога
         context['opt_page'] = self

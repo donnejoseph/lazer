@@ -4,7 +4,7 @@
 {% block content %}
 <section>
     <div class="container">
-        <div class="row">
+        <div class="row tovar-description">
             <div class="col-1">
                 <!-- Галерея изображений товара -->
                 <div class="image-gallery d-flex flex-column">
@@ -66,57 +66,10 @@
 {% include 'mypages/partial/best_seller_section.html' %}
 {% include 'mypages/partial/stocks_section.html' %}
 {% include 'mypages/partial/contacts_section.html' %}
-<script>
-function changeMainImage(imageUrl) {
-    document.getElementById('main-image').src = imageUrl; // Изменяем src у основного изображения
-}
 
-// Скрипты для управления количеством товара
-const unitPrice = 2200;
-function updateTotalPrice(quantity) {
-    const totalPrice = unitPrice * quantity;
-    document.getElementById("totalPrice").innerText = `${totalPrice.toLocaleString()} р.`;
-}
-
-function increaseQuantity() {
-    let quantityInput = document.getElementById("quantity");
-    let quantity = parseInt(quantityInput.value, 10);
-    quantity += 1;
-    quantityInput.value = quantity;
-    updateTotalPrice(quantity);
-}
-
-function decreaseQuantity() {
-    let quantityInput = document.getElementById("quantity");
-    let quantity = parseInt(quantityInput.value, 10);
-    if (quantity > 1) {
-        quantity -= 1;
-        quantityInput.value = quantity;
-        updateTotalPrice(quantity);
-    }
-}
-</script>
 
 <style>
-.image-gallery {
-    height: 100%; /* Высота галереи */
-    display: flex;
-    flex-direction: column; /* Вертикальное выравнивание миниатюр */
-    justify-content: space-between; /* Увеличиваем пространство между верхней и нижней миниатюрами */
-}
+.
 
-.gallery-item {
-    margin: 0; /* Убираем отступ, чтобы миниатюры были равномерные */
-}
-
-.tovars-card-mini-img {
-    width: 100%; /* Полная ширина для миниатюр */
-    height: auto; /* Пропорциональная высота */
-}
-
-.tovars-card-img {
-    width: 100%; /* Полная ширина для основного изображения */
-    height: auto; /* Пропорциональная высота */
-}
 </style>
 {% endblock %}
