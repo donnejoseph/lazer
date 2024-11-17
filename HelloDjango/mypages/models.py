@@ -22,6 +22,9 @@ class HomePage(Page):
         context['about_page'] = AboutPage.objects.first() or None
         return context
 
+    class Meta:
+        verbose_name = "Главная страница"
+
 
 class CatalogPage(Page):
     intro = RichTextField(blank=True)
@@ -41,6 +44,9 @@ class CatalogPage(Page):
         context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
         return context
 
+    class Meta:
+        verbose_name = "Каталог"
+
 
 class OptPage(Page):
     intro = RichTextField(blank=True)
@@ -59,6 +65,9 @@ class OptPage(Page):
         context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
         return context
 
+    class Meta:
+        verbose_name = "Оптовикам"
+
 
 class NewsPage(Page):
     intro = RichTextField(blank=True)
@@ -76,6 +85,9 @@ class NewsPage(Page):
         context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
         return context
 
+    class Meta:
+        verbose_name = "Новости"
+
 
 class AboutPage(Page):
     intro = RichTextField(blank=True)
@@ -92,3 +104,6 @@ class AboutPage(Page):
         context['news_page'] = NewsPage.objects.first() or None
         context['about_page'] = self
         return context
+
+    class Meta:
+        verbose_name = "Контакты"
