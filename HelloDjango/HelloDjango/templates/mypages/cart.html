@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <section class="korzina-section">
     <div class="container">
@@ -57,6 +57,50 @@
         {% else %}
             <p>Ваша корзина пуста.</p>
         {% endif %}
+    </div>
+</section>
+{% load wagtailcore_tags %}
+
+<section class="best-sellers-section best-sellers-section-cart">
+    <div class="container best-sellers-container">
+        <h2 class="best-sellers-title">с этим товаром покупают</h2>
+        <div class="row best-sellers-row">
+            <div class="owl-carousel">
+                {% for product in products %}
+                    <div class="item">
+                        <!-- Оборачиваем в ссылку на страницу товара -->
+                        <a href="{% pageurl product %}" class="product-link" style="text-decoration: none;">
+                            {% if product.images.first %}
+                                <img src="{{ product.images.first.image.url }}" class="best-sellers-img" alt="{{ product.title }}" />
+                            {% endif %}
+                            <h4 class="mb-4" style="
+                                color: #313131;
+                                font-family: 'Metrika', sans-serif;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 120%;
+                                text-decoration: none;
+                                text-transform: uppercase;
+                            ">
+                                {{ product.title }}
+                            </h4>
+                        </a>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="carousel-price">{{ product.price }} руб.</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button type="button" class="btn carousel-button-buy carousel-button-buy-owl">КУПИТЬ</button>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Нет акционных товаров.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </section>
 

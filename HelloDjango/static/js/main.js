@@ -121,3 +121,32 @@ function decreaseQuantity() {
         }
     }
 }
+
+
+function addToCart(productId) {
+    fetch(`/add_to_cart/${productId}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Обновляем количество товаров в корзине
+            const badge = document.querySelector('.cart-quantity-badge');
+            if (badge) {
+                badge.textContent = data.cart_total_quantity;
+            } else {
+                const cartLink = document.querySelector('.shopping-cart a');
+                const span = document.createElement('span');
+                span.classList.add('cart-quantity-badge');
+                span.textContent = data.cart_total_quantity;
+                cartLink.appendChild(span);
+            }
+        } else {
+            alert(data.message);
+        }
+    });
+}
+

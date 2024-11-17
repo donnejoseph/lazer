@@ -2478,6 +2478,23 @@ footer {
     margin-bottom: 0px;
 }
 
+.best-sellers-section-cart{
+    margin-bottom: 0px;
+}
+
+.cart-quantity-badge {
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    background-color: #CE8A37;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+}
 
 
 

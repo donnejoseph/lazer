@@ -1,11 +1,6 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-
 from .models import ProductPage
-
 
 def add_to_cart(request, product_id):
     """Добавление товара в корзину."""
@@ -32,14 +27,30 @@ def add_to_cart(request, product_id):
         }
 
     request.session['cart'] = cart
-    return JsonResponse({'status': 'success', 'message': 'Товар добавлен в корзину'})
+
+    # Обновляем общее количество товаров в корзине
+    cart_total_quantity = sum(item['quantity'] for item in cart.values())
+
+    return JsonResponse({
+        'status': 'success',
+        'message': 'Товар добавлен в корзину',
+        'cart_total_quantity': cart_total_quantity
+    })
 
 
 def view_cart(request):
     """Просмотр содержимого корзины"""
     cart = request.session.get('cart', {})
     cart_total = sum(float(item['price']) * item['quantity'] for item in cart.values())
-    return render(request, 'mypages/cart.html', {'cart': cart, 'cart_total': cart_total})
+    cart_total_quantity = sum(item['quantity'] for item in cart.values())  # Общее количество товаров
+    products = ProductPage.objects.all()[0:16]
+
+    return render(request, 'mypages/cart.html', {
+        'cart': cart,
+        'cart_total': cart_total,
+        'cart_total_quantity': cart_total_quantity,  # Передаем общее количество товаров
+        'products': products
+    })
 
 
 def remove_from_cart(request, product_id):

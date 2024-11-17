@@ -35,12 +35,15 @@
                     </div>
                 </div>
                 <div class="col-md-1 col-4">
-                    <div class="shopping-cart ms-auto">
-                        <a href="/cart/">
-                            <img src="{% static 'img/shopping-cart.png' %}" alt="Корзина покупок" />
-                        </a>
+                    <div class="shopping-cart ms-auto position-relative">
+                    <a href="/cart/">
+                        <img src="{% static 'img/shopping-cart.png' %}" alt="Корзина покупок" />
+                        {% if cart_total_quantity > 0 %}
+                            <span class="cart-quantity-badge">{{ cart_total_quantity }}</span>
+                        {% endif %}
+                    </a>
+                </div>
 
-                    </div>
                 </div>
             </div>
         </div>
