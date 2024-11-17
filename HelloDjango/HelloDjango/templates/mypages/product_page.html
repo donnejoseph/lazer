@@ -30,20 +30,31 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-6">
-                        <span class="description-button">Описание</span>
-                        <div class="tovars-card-line"></div>
-                    </div>
-                    <div class="col-md-9 col-6">
-                        <span class="description-button">Характеристики</span>
-                        <div class="tovars-card-line"></div>
+                    <!-- Табы -->
+                    <ul class="nav nav-tabs custom-tabs d-flex" id="productTab" role="tablist">
+                        <li class="nav-item-tab flex-grow-1 text-center" role="presentation">
+                            <a class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
+                                Описание
+                            </a>
+                        </li>
+                        <li class="nav-item-tab flex-grow-1 text-center" role="presentation">
+                            <a class="nav-link" id="specifications-tab" data-bs-toggle="tab" data-bs-target="#specifications" type="button" role="tab" aria-controls="specifications" aria-selected="false">
+                                Характеристики
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-tab-content mt-3" id="productTabContent">
+                        <!-- Контент вкладки "Описание" -->
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <p class="tovars-card-text">{{ page.description|safe }}</p>
+                        </div>
+                        <!-- Контент вкладки "Характеристики" -->
+                        <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                            <p class="tovars-card-text">{{ page.specifications|safe }}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <p class="tovars-card-text">{{ page.description|safe }}</p>
-                    </div>
-                </div>
+
                 <div class="row tovars-card-bottom-row">
                     <div class="col-md-4 col-12 ">
                         <span class="tovars-card-price">{{ page.price }} Р</span>
@@ -67,9 +78,66 @@
 {% include 'mypages/partial/stocks_section.html' %}
 {% include 'mypages/partial/contacts_section.html' %}
 
-
 <style>
-.
+/* Стили для табов */
+.custom-tabs {
+    display: flex;
+    justify-content: flex-start; /* Выравнивание табов в строку */
+    border-bottom: 2px solid #e6e6e6; /* Серый разделитель */
+    margin-bottom: 15px;
+    list-style: none;
+    padding: 0;
+}
 
+.custom-tabs .nav-item {
+    flex-grow: 1; /* Делает вкладки одинаковой ширины */
+    text-align: center; /* Выравнивание текста по центру */
+    background-color: None !important; /* Фон вкладок */
+}
+
+
+.custom-tabs .nav-link {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0; /* Убираем отступы между табами */
+    padding: 10px 15px; /* Добавляем отступы для кликабельности */
+    border: none; /* Убираем стандартные границы Bootstrap */
+    border-bottom: 1px solid #CE8A37;
+
+    text-transform: uppercase;
+
+    transition: all 0.3s ease;
+
+    color: #CE8A37;
+    font-family: Arsenal;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 12px */
+}
+
+.custom-tabs .nav-link.active {
+    color: #708759;
+    font-family: Arsenal;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 12px */
+    border-color: None; /* Подчеркивание активной вкладки */
+    border-radius: 0; /* Убираем закругление углов */
+    border-bottom: 1px solid #708759;
+    background-color: transparent;
+}
+
+.custom-tab-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444; /* Основной цвет текста */
+}
+
+.custom-tabs .nav-link:hover {
+    color: #555; /* Цвет текста при наведении */
+}
 </style>
 {% endblock %}

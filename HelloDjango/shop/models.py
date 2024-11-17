@@ -52,12 +52,15 @@ class ProductPage(Page):
         verbose_name="Категория"
     )
     description = RichTextField(blank=True, verbose_name="Описание товара")
+    specifications = RichTextField(blank=True, verbose_name="Характеристики товара")
+
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
     is_promotional = models.BooleanField(default=False, verbose_name="Акционный товар")
 
     content_panels = Page.content_panels + [
         FieldPanel('category'),
         FieldPanel('description'),
+        FieldPanel('specifications'),
         FieldPanel('price'),
         FieldPanel('is_promotional'),
         InlinePanel('images', label="Изображения товара"),
