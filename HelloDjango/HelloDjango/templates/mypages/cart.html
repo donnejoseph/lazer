@@ -4,7 +4,10 @@
 <section class="korzina-section">
     <div class="container">
         {% if cart %}
-            <h2 class="korzina-title">В корзине {{ cart|length }} {{ cart|length|pluralize:"товар,товара,товаров" }}</h2>
+            <h2 class="korzina-title">
+            В корзине {{ cart_total_quantity }} {{ cart_total_quantity|pluralize:"товар,товара,товаров" }}
+        </h2>
+
 
             <!-- Список товаров в корзине -->
             {% for product_id, product in cart.items %}

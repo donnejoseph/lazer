@@ -162,21 +162,52 @@ function updateQuantity(productId, action) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Обновляем количество товара на странице
+            // Обновляем количество товара
             const quantityInput = document.getElementById(`quantity-${productId}`);
             const totalPriceElement = document.getElementById(`totalPrice-${productId}`);
             const totalPriceText = document.querySelector('.korzina-total-price-text');
+            const cartTitle = document.querySelector('.korzina-title');
+            const badge = document.querySelector('.cart-quantity-badge');
 
-            if (quantityInput) {
-                quantityInput.value = data.cart_total_quantity;
+            // Проверяем данные перед обновлением
+            if (data.new_quantity !== undefined && data.price !== undefined) {
+                // Обновляем количество для конкретного товара
+                if (quantityInput) {
+                    quantityInput.value = data.new_quantity; // Обновляем значение количества в поле
+                }
+
+                // Обновляем общую цену для конкретного товара
+                if (totalPriceElement) {
+                    const newItemTotal = parseFloat(data.new_quantity) * parseFloat(data.price);
+                    totalPriceElement.textContent = `${newItemTotal.toFixed(2)} р.`;
+                }
+            } else {
+                console.error("Ошибка данных: некорректное количество или цена");
             }
 
-            if (totalPriceElement) {
-                totalPriceElement.textContent = `${data.cart_total.toFixed(2)} р.`;
-            }
-
-            if (totalPriceText) {
+            // Обновляем общую стоимость корзины
+            if (totalPriceText && data.cart_total !== undefined) {
                 totalPriceText.textContent = `${data.cart_total.toFixed(2)} р.`;
+            } else {
+                console.error("Ошибка данных: некорректная общая стоимость корзины");
+            }
+
+            // Обновляем заголовок "В корзине X товара"
+            if (cartTitle) {
+                const quantity = data.cart_total_quantity || 0; // Убеждаемся, что значение есть
+                const word = getCorrectWord(quantity, ['товар', 'товара', 'товаров']);
+                cartTitle.textContent = `В корзине ${quantity} ${word}`;
+            }
+
+            // Обновляем количество товаров в иконке корзины
+            if (badge) {
+                badge.textContent = data.cart_total_quantity || 0;
+            } else if (data.cart_total_quantity > 0) {
+                const cartLink = document.querySelector('.shopping-cart a');
+                const span = document.createElement('span');
+                span.classList.add('cart-quantity-badge');
+                span.textContent = data.cart_total_quantity || 0;
+                cartLink.appendChild(span);
             }
         } else {
             alert(data.message || 'Ошибка обновления корзины');
@@ -187,6 +218,9 @@ function updateQuantity(productId, action) {
         alert('Произошла ошибка при обновлении корзины');
     });
 }
+
+
+
 
 // Функция для получения CSRF-токена из куки
 function getCookie(name) {
@@ -203,4 +237,13 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function getCorrectWord(number, words) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return words[
+        (number % 100 > 4 && number % 100 < 20)
+            ? 2
+            : cases[Math.min(number % 10, 5)]
+    ];
 }
