@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="korzina-section">
+    <div class="container">
+        {% if cart %}
+            <h2 class="korzina-title">В корзине {{ cart|length }} {{ cart|length|pluralize:"товар,товара,товаров" }}</h2>
+
+            <!-- Список товаров в корзине -->
+            {% for product_id, product in cart.items %}
+            <div class="row korzina-tovar-row">
+                <div class="col-md-2 col-12">
+                    <img src="{{ product.image }}" class="korzina-tovar-img" alt="{{ product.name }}">
+                </div>
+                <div class="col-md-5 col-12 d-flex align-items-center">
+                    <span class="korzina-tovars-name">
+                        {{ product.name }}
+                    </span>
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="quantity-control">
+                          <button onclick="updateQuantity('{{ product_id }}', 'decrease')">−</button>
+                          <input type="text" id="quantity-{{ product_id }}" value="{{ product.quantity }}" readonly>
+                          <button onclick="updateQuantity('{{ product_id }}', 'increase')">+</button>
+                        </div>
+                        <span class="korzina-tovars-price" id="totalPrice-{{ product_id }}">{{ product.price|floatformat:2 }} р.</span>
+                    </div>
+                </div>
+                <div class="col-md-1 col-9 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'remove_from_cart' product_id=product_id %}">
+                        <svg class="korzina-tovar-close-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="korzina-tovar-line"></div>
+            </div>
+            {% endfor %}
+
+            <!-- Общая стоимость -->
+            <div class="row">
+                <div class="col-md-7 col-0"></div>
+                <div class="col-md-5 col-12 korzina-custom-col">
+                    <span class="korzina-total-text">
+                        Итого
+                    </span>
+                    <span class="korzina-total-price-text">
+                        {{ cart_total|floatformat:2 }} р.
+                    </span>
+                    <button type="button" class="btn btn-primary korzina-button">
+                        оформить заказ
+                    </button>
+                </div>
+            </div>
+        {% else %}
+            <p>Ваша корзина пуста.</p>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+function updateQuantity(productId, action) {
+    // Пример обновления количества товара через запрос
+    fetch(`/update_cart/${productId}/${action}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Ошибка обновления корзины');
+        }
+    });
+}
+</script>
+{% endblock %}

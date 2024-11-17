@@ -26,7 +26,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <!-- Табы -->
                     <ul class="nav nav-tabs custom-tabs d-flex" id="productTab" role="tablist">
                         <li class="nav-item-tab flex-grow-1 text-center" role="presentation">
                             <a class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
@@ -52,33 +51,45 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-5">
 
+        <div class="row tovars-card-bottom-row">
+            <div class="col-md-4 col-12 text-start mt-5">
+                <span class="tovars-card-price">{{ page.price }} Р</span>
             </div>
-            <div class="col-md-7">
-                <div class="row tovars-card-bottom-row">
-                    <div class="col-md-4 col-12 text-start mt-5">
-                        <span class="tovars-card-price">{{ page.price }} Р</span>
-                    </div>
-                    <div class="col-md-4 col-12 d-flex flex-column align-items-start align-items-md-end justify-content-end">
-                        <div class="quantity-control quantity-control-1 d-flex align-items-center">
-                            <button onclick="decreaseQuantity()">−</button>
-                            <input type="text" id="quantity" value="1" readonly>
-                            <button onclick="increaseQuantity()">+</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12 d-flex flex-column align-items-end justify-content-end">
-                        <button type="button" class="btn btn-primary tovars-card-button">В корзину</button>
-                    </div>
+            <div class="col-md-4 col-12 d-flex flex-column align-items-start align-items-md-end justify-content-end">
+                <div class="quantity-control d-flex align-items-center">
+                    <button onclick="decreaseQuantity()">−</button>
+                    <input type="text" id="quantity" value="1" readonly>
+                    <button onclick="increaseQuantity()">+</button>
                 </div>
+            </div>
+            <div class="col-md-4 col-12 d-flex flex-column align-items-end justify-content-end">
+                <!-- Кнопка добавления в корзину -->
+                <button type="button" class="btn btn-primary tovars-card-button" onclick="addToCart('{{ page.id }}')">В корзину</button>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+function addToCart(productId) {
+    fetch(`/add_to_cart/${productId}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Товар добавлен в корзину');
+        } else {
+            alert('Ошибка добавления в корзину');
+        }
+    });
+}
+</script>
+
 {% include 'mypages/partial/best_seller_section.html' %}
 {% include 'mypages/partial/stocks_section.html' %}
 {% include 'mypages/partial/contacts_section.html' %}
-
-
 {% endblock %}
