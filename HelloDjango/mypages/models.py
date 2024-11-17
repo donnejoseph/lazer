@@ -177,3 +177,29 @@ class StocksFormSubmission(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.submitted_at}"
+
+
+class ThankYouPage(Page):
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
+    ]
+
+    def get_template(self, request, *args, **kwargs):
+        return 'mypages/thank_you_page.html'
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context.update({
+            'best_sellers': ProductPage.objects.filter(is_promotional=True)[:16],
+            'home_page': HomePage.objects.first(),
+            'catalog_page': CatalogPage.objects.first(),
+            'opt_page': OptPage.objects.first(),
+            'news_page': self,
+            'about_page': AboutPage.objects.first(),
+        })
+        return context
+
+    class Meta:
+        verbose_name = "Страница благодарности"

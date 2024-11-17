@@ -2,6 +2,8 @@ import logging
 from django import template
 from django.core.mail import send_mail
 from mypages.models import StocksFormSubmission
+from django.http import HttpResponseRedirect
+
 
 logger = logging.getLogger(__name__)
 register = template.Library()
@@ -34,7 +36,7 @@ def render_stocks_form(context):
                 logger.info("Email sent successfully")
             except Exception as e:
                 logger.error(f"Error sending email: {e}")
-            return {'submitted': True}
+            return HttpResponseRedirect('/thank-you/')
 
         logger.warning("Form validation failed")
     return {'submitted': False}
