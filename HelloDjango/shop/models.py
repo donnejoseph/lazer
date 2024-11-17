@@ -5,7 +5,6 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from modelcluster.fields import ParentalKey
 
 
-
 class CategoryPage(Page):
     description = RichTextField(blank=True, verbose_name="Описание категории")
     image = models.ForeignKey(
@@ -24,14 +23,19 @@ class CategoryPage(Page):
 
     subpage_types = ['shop.ProductPage']
 
-    def get_template(self, request, *args, **kwargs):
-        return 'mypages/category_page.html'
-
     def get_context(self, request):
         context = super().get_context(request)
-        context['products'] = self.products.all()[:12]
+        if self.pk:
+            # Гарантируем, что передаются Page объекты (для тегов Wagtail)
+            context['products'] = self.get_children().live().specific()[:50]
+        else:
+            context['products'] = []
+        # Пример дополнительного контекста для других разделов
         context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
         return context
+
+    def get_template(self, request, *args, **kwargs):
+        return 'mypages/category_page.html'  # Указываем правильный путь к файлу
 
     class Meta:
         verbose_name = "Категория"
@@ -61,17 +65,10 @@ class ProductPage(Page):
 
     parent_page_types = ['shop.CategoryPage']
 
-    def get_template(self, request, *args, **kwargs):
-        return 'mypages/product_page.html'
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:18]
-        return context
-
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+
 
 class ProductImage(models.Model):
     product = ParentalKey(ProductPage, on_delete=models.CASCADE, related_name='images')

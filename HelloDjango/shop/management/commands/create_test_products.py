@@ -30,17 +30,17 @@ class Command(BaseCommand):
     help = 'Create 20 new products with random data and existing images.'
 
     """
-    Категория: Менажницы и разделочные доски - 5
-    Категория: Пазлы - 88
-    Категория: Подставки для телефонов - 89
-    Категория: Панно - 90
-    Категория: Упаковка - 320
-    Категория: Рукоделие - 321
+    Категория: Менажницы - 1689
+    Категория: Пазлы - 1690
+    Категория: Панно - 1691
+    Категория: Подставки для телефонов - 1692
+    Категория: Упаковка - 1693
+    Категория: Рукоделие - 1694
 
     """
 
     def handle(self, *args, **kwargs):
-        parent_page = Page.objects.get(id=random.choice([90, 89, 88, 5]))
+        parent_page = Page.objects.get(id=random.choice([1689, 1690, 1691, 1692, 1693, 1694]))  # Получаем случайную страницу категории
         categories = CategoryPage.objects.all()
 
 
@@ -52,14 +52,14 @@ class Command(BaseCommand):
             self.stderr.write("Нет изображений для создания продуктов.")
             return
 
-        for i in range(1, 1000):  # Создаем 200 новых продуктов
+        for i in range(1, 100):  # Создаем 200 новых продуктов
             # Создаем новый продукт
             product_copy = ProductPage(
                 title=random.choice(["менажница", "доска", "поднос", "подставка", "подарочный набор", "подарочная коробка"]),  # Случайное название
                 description="Описание тестового товара",  # Пример описания
                 price=random.randint(1000, 10000),  # Случайная цена от 100 до 10,000
                 is_promotional=random.choice([True, False]),  # Случайный флаг акционного товара
-                category = CategoryPage.objects.get(id=321)
+                category = CategoryPage.objects.get(id=random.choice([3293]))  # Получаем случайную категорию
             )
 
             # Генерация slug на английском (транслитерируем название товара)
