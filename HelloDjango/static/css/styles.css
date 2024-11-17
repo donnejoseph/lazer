@@ -2320,7 +2320,7 @@ footer {
 
 .description-button:hover,
 .tovars-card-line:hover .description-button,
-.tovars-card-line:hover~.description-button {
+.tovars-card-line:hover .description-button {
     color: #CE8A37;
 }
 
@@ -2339,6 +2339,7 @@ footer {
     font-weight: 400;
     line-height: 160%;
     margin-bottom: 50px;
+    margin-top: 40px;
 }
 
 .tovars-card-price-before {
