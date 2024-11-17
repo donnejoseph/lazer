@@ -98,6 +98,7 @@ class NewsPage(Page):
         context['opt_page'] = OptPage.objects.first()
         context['news_page'] = self
         context['about_page'] = AboutPage.objects.first()  # Получаем страницу "О нас"
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:16]
         return context
 
     class Meta:

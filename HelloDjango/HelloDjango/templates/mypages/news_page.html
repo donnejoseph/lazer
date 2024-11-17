@@ -1,10 +1,121 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags wagtailcore_tags %}  <!-- Загружаем необходимые теги -->
+{% load wagtailimages_tags wagtailcore_tags %}
+<!-- Загружаем необходимые теги -->
 {% block content %}
-    {% if page.image %}
-        {% image page.image width-800 as my_image %}  <!-- Используем длину ширины -->
-    {% endif %}
-    {% include 'mypages/partial/best_seller_section.html' %}
-    {% include 'mypages/partial/stocks_section.html' %}
-    {% include 'mypages/partial/contacts_section.html' %}
+<section class="news-section">
+    <div class="container news-container">
+        <h2 class="news-title">новости</h2>
+        <div class="row news-top-row">
+            <div class="col-md-4 col-12">
+                <div class="news-card">
+                    <img src="{{ '/static/img/card-img-1.png' }}" class="card-img" alt="">
+                    <span class="card-mini-title ">ДЕРЕВО ИЛИ ПЛАСТИК? КАКУЮ<br>РАЗДЕЛОЧНУЮ ДОСКУ ВЫБРАТЬ?</span>
+                    <span class="card-text">Почему деревянные разделочные доски – это<br> будущее вашей кухни? Исследуем их<br>преимущества, включая долговечность и<br> защиту ножей. </span>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn card-button">
+                            Подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
+                                <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-12">
+                <div class="news-video-1">
+                    <div class="about-us-video-zaglushka">
+                        <video id="aboutUsVideo" width="100%" height="100%">
+                            <source src="{{ '/static/video/random-video.mp4' }}" type="video/mp4" />
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                        <div class="play" id="playButton">
+                            <img src="{{ '/static/img/play.svg' }}" class="play-img" alt="Play" width="49" height="49" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row news-mid-row">
+            <div class="col-md-4 col-12">
+                <div class="news-card">
+                    <img src="{{ '/static/img/card-img-2.png' }}" class="card-img" alt="">
+                    <span class="card-mini-title ">ДЕРЕВЯННЫЕ ПОДСТАВКИ ДЛЯ<br>ТЕЛЕФОНА</span>
+                    <span class="card-text">Представляем новую коллекцию подставок под телефоны, выполненных из натурального дерева, которые идеально впишутся в любой интерьер и подчеркнут его стиль.</span>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn card-button">
+                            Подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
+                                <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="news-card">
+                    <img src="{{ '/static/img/card-img-3.png' }}" class="card-img" alt="">
+                    <span class="card-mini-title ">ДЕРЕВЯННЫЕ ИЗДЕЛИЯ ДЛЯ ДОМА:<br>ЭКОЛОГИЧЕСКИ ЧИСТЫЙ ВЫБОР</span>
+                    <span class="card-text">Узнайте, почему стоит предпочитать деревянные изделия: от менажниц до упаковки – это не только стильно, но и заботливо для природы.</span>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn card-button">
+                            Подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
+                                <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="news-card">
+                    <img src="{{ '/static/img/card-img-4.png' }}" class="card-img" alt="">
+                    <span class="card-mini-title ">РУЧНАЯ РАБОТА: КАК МЫ СОЗДАЕМ УНИКАЛЬНЫЕ МЕНАЖНИЦЫ</span>
+                    <span class="card-text">Погружение в процесс создания наших деревянных менажниц: от выбора дерева до финальной обработки – узнайте, что стоит за каждым изделием</span>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn card-button">
+                            Подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
+                                <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row news-bottom-row">
+            <div class="col-md-8 col-12">
+                <div class="news-video-2">
+                    <div class="about-us-video-zaglushka">
+                        <video id="reviewsVideo1" width="100%" height="100%">
+                            <source src="{{ '/static/video/random-video.mp4' }}" type="video/mp4" />
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                        <div class="play" id="playButton1">
+                            <img src="{{ '/static/img/play.svg' }}" class="play-img" alt="Play" width="49" height="49" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="news-card">
+                    <img src="{{ '/static/img/card-img-5.png' }}" class="card-img" alt="">
+                    <span class="card-mini-title ">КАК ВЫБРАТЬ ИДЕАЛЬНУЮ РАЗДЕЛОЧНУЮ ДОСКУ?</span>
+                    <span class="card-text">Исчерпывающее руководство по выбору разделочной доски: что учитывать при покупке, как ухаживать за деревом и какие виды лучше всего подходят для кухни.</span>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn card-button">
+                            Подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
+                                <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'mypages/partial/best_seller_section.html' %}
+{% include 'mypages/partial/stocks_section.html' %}
+{% include 'mypages/partial/contacts_section.html' %}
 {% endblock %}

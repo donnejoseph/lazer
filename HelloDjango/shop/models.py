@@ -65,6 +65,14 @@ class ProductPage(Page):
 
     parent_page_types = ['shop.CategoryPage']
 
+    def get_template(self, request, *args, **kwargs):
+        return 'mypages/product_page.html'  # Указываем правильный путь к файлу
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
+        return context
+
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
