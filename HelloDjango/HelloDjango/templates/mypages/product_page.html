@@ -3,26 +3,22 @@
 
 {% block content %}
 <section>
-    <div class="container">
-        <div class="row tovar-description">
+    <div class="container tovar-description">
+        <div class="row">
             <div class="col-1">
                 <!-- Галерея изображений товара -->
                 <div class="image-gallery d-flex flex-column">
                     {% for image in page.images.all %}
-                        <div class="gallery-item" onclick="changeMainImage('{{ image.image.url }}')">
-                            <img src="{{ image.image.url }}"
-                                 class="tovars-card-mini-img"
-                                 alt="Изображение {{ page.title }}">
-                        </div>
+                    <div class="gallery-item" onclick="changeMainImage('{{ image.image.url }}')">
+                        <img src="{{ image.image.url }}" class="tovars-card-mini-img" alt="Изображение {{ page.title }}">
+                    </div>
                     {% endfor %}
                 </div>
             </div>
-
             <div class="col-md-4 col-9">
                 <!-- Основное изображение -->
                 <img id="main-image" src="{% if page.images.first %}{{ page.images.first.image.url }}{% endif %}" class="tovars-card-img" alt="{{ page.title }}">
             </div>
-
             <div class="col-7">
                 <div class="row">
                     <div class="col-12">
@@ -54,9 +50,15 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
 
+            </div>
+            <div class="col-md-7">
                 <div class="row tovars-card-bottom-row">
-                    <div class="col-md-4 col-12 ">
+                    <div class="col-md-4 col-12 text-start mt-5">
                         <span class="tovars-card-price">{{ page.price }} Р</span>
                     </div>
                     <div class="col-md-4 col-12 d-flex flex-column align-items-start align-items-md-end justify-content-end">
