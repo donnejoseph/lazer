@@ -20,10 +20,11 @@
                 <div class="col-md-4 d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <div class="quantity-control">
-                          <button onclick="updateQuantity('{{ product_id }}', 'decrease')">−</button>
-                          <input type="text" id="quantity-{{ product_id }}" value="{{ product.quantity }}" readonly>
-                          <button onclick="updateQuantity('{{ product_id }}', 'increase')">+</button>
+                            <button onclick="updateQuantity('{{ product_id }}', 'decrease')">−</button>
+                            <input type="text" id="quantity-{{ product_id }}" value="{{ product.quantity }}" readonly>
+                            <button onclick="updateQuantity('{{ product_id }}', 'increase')">+</button>
                         </div>
+
                         <span class="korzina-tovars-price" id="totalPrice-{{ product_id }}">{{ product.price|floatformat:2 }} р.</span>
                     </div>
                 </div>

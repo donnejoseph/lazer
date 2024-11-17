@@ -62,3 +62,28 @@ def remove_from_cart(request, product_id):
 
     request.session['cart'] = cart
     return redirect('view_cart')  # Возвращаем на страницу корзины
+
+def update_cart(request, product_id, action):
+    """Обновление количества товара в корзине."""
+    cart = request.session.get('cart', {})
+
+    if str(product_id) in cart:
+        if action == 'increase':
+            cart[str(product_id)]['quantity'] += 1
+        elif action == 'decrease' and cart[str(product_id)]['quantity'] > 1:
+            cart[str(product_id)]['quantity'] -= 1
+
+        request.session['cart'] = cart
+
+        # Подсчитываем итоговую стоимость и количество товаров
+        cart_total_quantity = sum(item['quantity'] for item in cart.values())
+        cart_total = sum(float(item['price']) * item['quantity'] for item in cart.values())
+
+        return JsonResponse({
+            'success': True,
+            'cart_total_quantity': cart_total_quantity,
+            'cart_total': cart_total
+        })
+    else:
+        return JsonResponse({'success': False, 'message': 'Товар не найден в корзине'}, status=404)
+

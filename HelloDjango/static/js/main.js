@@ -150,3 +150,57 @@ function addToCart(productId) {
     });
 }
 
+
+function updateQuantity(productId, action) {
+    fetch(`/update_cart/${productId}/${action}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Получаем CSRF токен из куки
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Обновляем количество товара на странице
+            const quantityInput = document.getElementById(`quantity-${productId}`);
+            const totalPriceElement = document.getElementById(`totalPrice-${productId}`);
+            const totalPriceText = document.querySelector('.korzina-total-price-text');
+
+            if (quantityInput) {
+                quantityInput.value = data.cart_total_quantity;
+            }
+
+            if (totalPriceElement) {
+                totalPriceElement.textContent = `${data.cart_total.toFixed(2)} р.`;
+            }
+
+            if (totalPriceText) {
+                totalPriceText.textContent = `${data.cart_total.toFixed(2)} р.`;
+            }
+        } else {
+            alert(data.message || 'Ошибка обновления корзины');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при обновлении корзины');
+    });
+}
+
+// Функция для получения CSRF-токена из куки
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Проверяем, что кука начинается с нужного имени
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
