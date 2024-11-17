@@ -1627,11 +1627,12 @@ footer {
   background-image: url('/static/img/bestsellers-bg.png');
   height: 580px;
 }
-
-
-
-
-
+.opt-best-seller-section .best-sellers-section{
+   margin-bottom: 0px;
+}
+.opt-contacts-section .contacts-section{
+    background: None;
+}
 .news-title {
   padding-top: 80px;
   margin-bottom: 44px;

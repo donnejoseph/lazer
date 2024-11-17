@@ -1,10 +1,97 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags wagtailcore_tags %}  <!-- Загружаем необходимые теги -->
+{% load wagtailimages_tags wagtailcore_tags %}
+<!-- Загружаем необходимые теги -->
 {% block content %}
-    {% if page.image %}
-        {% image page.image width-800 as my_image %}  <!-- Используем длину ширины -->
-    {% endif %}
+<section class="optovikam-section">
+    <div class="container optovikam-container">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="d-flex justify-content-center justify-content-md-end">
+                    <h1 class="optovikam-title">мы рады работать<br>с корпоративными<br>клиентами</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="for-you-section">
+    <div class="container">
+        <h2 class="for-you-title">для вас</h2>
+        <div class="row">
+            <div class="col-md-4 col-12 d-flex flex-column align-items-center">
+                <img src="{{ '/static/img/punkt-1.png' }}" class="for-you-image" alt="">
+                <span class="for-you-text">Готовая продукция</span>
+            </div>
+            <div class="col-md-4 col-12 d-flex flex-column align-items-center">
+                <img src="{{ '/static/img/punkt-2.png' }}" class="for-you-image" alt="">
+                <span class="for-you-text">Разработка индивидуальных изделий</span>
+            </div>
+            <div class="col-md-4 col-12 d-flex flex-column align-items-center">
+                <img src="{{ '/static/img/punkt-3.png' }}" class="for-you-image" alt="">
+                <span class="for-you-text">Цены ниже общего прайса</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="from-you-section">
+    <div class="container from-you-container">
+        <h2 class="from-you-title">от вас</h2>
+        <div class="row from-you-top-row">
+            <div class="col-md-4 col-12 d-flex justify-content-center justify-content-md-end">
+                <div class="punkt-image-wrapper">
+                    <img src="{{ '/static/img/form-punk-1.png' }}" alt="">
+                    <span class="from-you-text">Пришлите нам карту предприятия</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-12 d-flex justify-content-center justify-content-md-end">
+                <div class="punkt-image-wrapper">
+                    <img src="{{ '/static/img/form-punk-2.png' }}" alt="">
+                    <span class="from-you-text">Мы с вами свяжемся и все обговорим</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-12 d-flex justify-content-center justify-content-md-end">
+                <div class="punkt-image-wrapper">
+                    <img src="{{ '/static/img/form-punk-3.png' }}" alt="">
+                    <span class="from-you-text">Изготовим продукцию для вас по выгодным ценам</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md col-12">
+                <div class="from-you-input-1">
+                    <input class="form-control stocks-form-control-1" type="text" placeholder="Ваше Имя" aria-label="default input example">
+                </div>
+            </div>
+            <div class="col-md col-12">
+                <div class="from-you-input-2">
+                    <input class="form-control stocks-form-control-2" type="text" placeholder="Номер телефона" aria-label="default input example">
+                </div>
+            </div>
+            <div class="col-md col-12">
+                <div class="from-you-input-3">
+                    <input class="form-control stocks-form-control-2" type="text" placeholder="Ваш Email" aria-label="default input example">
+                </div>
+            </div>
+            <div class="col-md col-12">
+                <div class="form-check from-you-form-check d-flex align-items-center">
+                    <input class="form-check-input from-you-form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label from-you-form-text" for="flexCheckDefault">
+                        Согласен на обработку <br> <span class="stocks-span">персональных данных</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md col-12">
+                <button type="button" class="btn btn-primary from-you-button">
+                    Заказать
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'mypages/partial/reviews_section.html' %}
+<div class="opt-best-seller-section">
     {% include 'mypages/partial/best_seller_section.html' %}
-    {% include 'mypages/partial/stocks_section.html' %}
+</div>
+<div class="opt-contacts-section">
     {% include 'mypages/partial/contacts_section.html' %}
+</div>
 {% endblock %}
