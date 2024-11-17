@@ -5,7 +5,7 @@
         <h2 class="product-items-title">{{ title }}</h2>
         <div class="row product-items-top-row justify-content-between">
             {% for product in products %}
-                <div class="col-lg-2 col-md-4 col-6 prod-card product-item {% if forloop.counter > 10 %}d-none{% endif %}">
+                <div class="col-lg-2 col-md-4 col-12 prod-card product-item {% if forloop.counter > 10 %}d-none{% endif %}">
                     <!-- Скрываем все продукты после 10-го -->
                     <div class="product-items">
                         {% if product.images.first %}
