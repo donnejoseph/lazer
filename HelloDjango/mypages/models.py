@@ -39,6 +39,10 @@ class CatalogPage(Page):
         context['best_sellers'] = ProductPage.objects.filter(is_promotional=True)[:6]
         context['manej'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=1689).first())
         context['pazly'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=1690).first())
+        context['podstavki'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=3293).first())
+        context['panno'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=1691).first())
+        context['upakovka'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=1693).first())
+        context['rukodelie'] = ProductPage.objects.filter(category=CategoryPage.objects.filter(id=1694).first())
 
         context['home_page'] = HomePage.objects.first()  # Получаем страницу главной
         context['catalog_page'] = self
