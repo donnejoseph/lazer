@@ -6,7 +6,6 @@ from django.template.response import TemplateResponse
 from shop.models import ProductPage, CategoryPage
 from django.db import models
 
-
 class HomePage(Page):
     intro = RichTextField(blank=True)
 
@@ -16,7 +15,7 @@ class HomePage(Page):
 
     def serve(self, request):
         context = self.get_context(request)
-        context['request'] = request  # Передаём request в контекст
+        context['request'] = request  # Передаем request в контекст
         return TemplateResponse(request, self.get_template(request), context)
 
     def get_context(self, request):
@@ -42,11 +41,14 @@ class CatalogPage(Page):
     ]
 
     def serve(self, request):
-        return self.render(request, context_overrides={'request': request})
+        context = self.get_context(request)
+        context['request'] = request  # Передаем request в контекст
+        return TemplateResponse(request, self.get_template(request), context)
 
     def get_context(self, request):
         context = super().get_context(request)
 
+        # Получаем категории продуктов
         categories = CategoryPage.objects.filter(
             id__in=[1689, 1690, 3293, 1691, 1693, 1694]
         ).prefetch_related('products')
@@ -80,7 +82,9 @@ class OptPage(Page):
     ]
 
     def serve(self, request):
-        return self.render(request, context_overrides={'request': request})
+        context = self.get_context(request)
+        context['request'] = request  # Передаем request в контекст
+        return TemplateResponse(request, self.get_template(request), context)
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -106,7 +110,9 @@ class NewsPage(Page):
     ]
 
     def serve(self, request):
-        return self.render(request, context_overrides={'request': request})
+        context = self.get_context(request)
+        context['request'] = request  # Передаем request в контекст
+        return TemplateResponse(request, self.get_template(request), context)
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -132,7 +138,9 @@ class AboutPage(Page):
     ]
 
     def serve(self, request):
-        return self.render(request, context_overrides={'request': request})
+        context = self.get_context(request)
+        context['request'] = request  # Передаем request в контекст
+        return TemplateResponse(request, self.get_template(request), context)
 
     def get_context(self, request):
         context = super().get_context(request)
