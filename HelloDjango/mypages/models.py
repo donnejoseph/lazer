@@ -20,6 +20,7 @@ class HomePage(Page):
         context['opt_page'] = OptPage.objects.first() or None
         context['news_page'] = NewsPage.objects.first() or None
         context['about_page'] = AboutPage.objects.first() or None
+        context['categories'] = CategoryPage.objects.live().public()
         return context
 
     class Meta:
