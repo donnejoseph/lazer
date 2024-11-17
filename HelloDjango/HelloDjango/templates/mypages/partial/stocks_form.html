@@ -1,0 +1,30 @@
+<form action="" method="post" class="stocks-form">
+    {% csrf_token %}
+    <div class="row stocks-bottom-row">
+        <!-- Поле для имени -->
+        <div class="col-12 col-md">
+            <div class="stocks-input-1">
+                <input class="form-control stocks-form-control-1" type="text" name="name" placeholder="Ваше Имя" aria-label="default input example" />
+            </div>
+        </div>
+        <!-- Поле для телефона -->
+        <div class="col-12 col-md">
+            <div class="stocks-input-2">
+                <input class="form-control stocks-form-control-2" type="text" name="phone" placeholder="Номер телефона" aria-label="default input example" />
+            </div>
+        </div>
+        <!-- Чекбокс -->
+        <div class="col-12 col-md d-flex justify-content-center align-items-center">
+            <div class="form-check stocks-form-check d-flex align-items-center">
+                <input class="form-check-input stocks-form-check-input me-2" type="checkbox" name="agreement" id="flexCheckDefault" />
+                <label class="form-check-label stocks-form-text" for="flexCheckDefault">
+                    Согласен на обработку <span class="stocks-span">персональных данных</span>
+                </label>
+            </div>
+        </div>
+        <!-- Кнопка -->
+        <div class="col-12 col-md d-flex justify-content-center align-items-center">
+            <button type="submit" name="stocks_form" class="btn btn-primary stocks-button">Заказать</button>
+        </div>
+    </div>
+</form>

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'wagtail.sites',
     'wagtail.search',
     'wagtail',
+    'wagtailcaptcha',
     'modelcluster',
     'taggit',
     'mypages',
@@ -180,3 +181,27 @@ TEMPLATES = [
 
 USE_I18N = True
 WAGTAIL_I18N_ENABLED = False  # Отключение интернационализации Wagtail Включите интернационализацию Wagtail
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER='platforma@dvkgroupp.ru'
+EMAIL_HOST_PASSWORD='hPEgW5hrkDL5yxycJ0be'
+
+SEND_EMAIL_NOTIFICATIONS = True
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+
