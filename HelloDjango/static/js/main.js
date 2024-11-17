@@ -74,11 +74,17 @@ function decreaseQuantity() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-        const showMoreButton = document.getElementById("show-more-button");
-        const hiddenItems = document.querySelectorAll(".product-item.d-none");
-        const itemsPerClick = 10;
+    const itemsPerClick = 10;
 
-        showMoreButton.addEventListener("click", function () {
+    // Находим все кнопки "Показать больше"
+    const showMoreButtons = document.querySelectorAll(".btn-show-more");
+
+    // Проходимся по каждой кнопке
+    showMoreButtons.forEach(button => {
+        const sectionId = button.id.split("-").pop(); // Получаем section_id из id кнопки
+        const hiddenItems = document.querySelectorAll(`.product-items-section-5[data-section-id="${sectionId}"] .product-item.d-none`);
+
+        button.addEventListener("click", function () {
             let shownCount = 0;
 
             hiddenItems.forEach(item => {
@@ -89,9 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Если больше нечего показывать, скрываем кнопку
-            if (document.querySelectorAll(".product-item.d-none").length === 0) {
-                showMoreButton.style.display = "none";
+            if (document.querySelectorAll(`.product-items-section-5[data-section-id="${sectionId}"] .product-item.d-none`).length === 0) {
+                button.style.display = "none";
             }
         });
     });
+});
+
 
