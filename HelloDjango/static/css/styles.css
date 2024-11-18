@@ -2398,6 +2398,14 @@ footer {
     text-transform: uppercase;
 }
 
+.tovars-card-button:hover {
+    background-color: #708759;
+}
+
+.tovars-card-button:active {
+    background-color: #708759 !important;
+}
+
 .best-sellers-section-tovars-card {
     margin-bottom: 60px;
 }

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load wagtailimages_tags %}
-
 {% block content %}
 <section>
     <div class="container tovar-description">
@@ -51,44 +50,46 @@
                 </div>
             </div>
         </div>
-
         <div class="row tovars-card-bottom-row">
-            <div class="col-md-4 col-12 text-start mt-5">
-                <span class="tovars-card-price">{{ page.price }} Р</span>
+            <div class="col-md-5 col-12">
             </div>
-            <div class="col-md-4 col-12 d-flex flex-column align-items-start align-items-md-end justify-content-end">
-                <div class="quantity-control d-flex align-items-center">
-                    <button onclick="decreaseQuantity()">−</button>
-                    <input type="text" id="quantity" value="1" readonly>
-                    <button onclick="increaseQuantity()">+</button>
+            <div class="col-md-7 col-12">
+                <div class="row align-items-center">
+                    <div class="col-md-4 col-12 text-start">
+                        <span class="tovars-card-price">{{ page.price }} Р</span>
+                    </div>
+                    <div class="col-md-4 col-12 d-flex flex-column align-items-start align-items-md-end justify-content-end">
+                        <div class="quantity-control d-flex align-items-center">
+                            <button onclick="decreaseQuantity()">−</button>
+                            <input type="text" id="quantity" value="1" readonly>
+                            <button onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 d-flex flex-column align-items-end justify-content-end">
+                        <!-- Кнопка добавления в корзину -->
+                        <button type="button" class="btn btn-primary tovars-card-button" onclick="addToCart('{{ page.id }}')">В корзину</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 col-12 d-flex flex-column align-items-end justify-content-end">
-                <!-- Кнопка добавления в корзину -->
-                <button type="button" class="btn btn-primary tovars-card-button" onclick="addToCart('{{ page.id }}')">В корзину</button>
-            </div>
         </div>
-    </div>
 </section>
-
 <script>
 function addToCart(productId) {
     fetch(`/add_to_cart/${productId}/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Товар добавлен в корзину');
-        } else {
-            alert('Ошибка добавления в корзину');
-        }
-    });
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Товар добавлен в корзину');
+            } else {
+                alert('Ошибка добавления в корзину');
+            }
+        });
 }
 </script>
-
 {% include 'mypages/partial/best_seller_section.html' %}
 {% include 'mypages/partial/stocks_section.html' %}
 {% include 'mypages/partial/contacts_section.html' %}
