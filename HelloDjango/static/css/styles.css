@@ -2927,6 +2927,7 @@ display: none;
     .reviews-video-zaglushka {
         width: 310px;
     }
+
 }
 
 @media (min-width: 1024px) and (max-width: 1163.64px) {
@@ -3033,6 +3034,7 @@ display: none;
     .navbar-top-text {
     margin-right: 55px;
 }
+
 
 .dosky,
  .panno,
