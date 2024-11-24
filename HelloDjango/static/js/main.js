@@ -124,20 +124,28 @@ function decreaseQuantity() {
 
 
 function addToCart(productId) {
+    const quantityInput = document.getElementById('quantity');
+    const quantity = parseInt(quantityInput.value, 10) || 1;
+
     fetch(`/add_to_cart/${productId}/`, {
-        method: 'GET',
+        method: 'POST', // Changed to POST
         headers: {
             'Content-Type': 'application/json',
-        }
+            'X-CSRFToken': getCookie('csrftoken') // Include CSRF token
+        },
+        body: JSON.stringify({ 'quantity': quantity })
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            // Обновляем количество товаров в корзине
+            alert('Товар добавлен в корзину');
+
+            // Update the cart quantity badge in the header
             const badge = document.querySelector('.cart-quantity-badge');
             if (badge) {
                 badge.textContent = data.cart_total_quantity;
             } else {
+                // If badge doesn't exist, create it
                 const cartLink = document.querySelector('.shopping-cart a');
                 const span = document.createElement('span');
                 span.classList.add('cart-quantity-badge');
@@ -145,10 +153,31 @@ function addToCart(productId) {
                 cartLink.appendChild(span);
             }
         } else {
-            alert(data.message);
+            alert(data.message || 'Ошибка добавления в корзину');
         }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
     });
 }
+
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does the cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 
 
 function updateQuantity(productId, action) {
@@ -219,25 +248,6 @@ function updateQuantity(productId, action) {
     });
 }
 
-
-
-
-// Функция для получения CSRF-токена из куки
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Проверяем, что кука начинается с нужного имени
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
 function getCorrectWord(number, words) {
     const cases = [2, 0, 1, 1, 1, 2];

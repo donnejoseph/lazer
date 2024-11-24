@@ -40,3 +40,13 @@ def render_stocks_form(context):
 
         logger.warning("Form validation failed")
     return {'submitted': False}
+
+
+
+@register.filter
+def multiply(value, arg):
+    """Умножает значение на аргумент."""
+    try:
+        return float(value) * float(arg)
+    except (ValueError, TypeError):
+        return ''

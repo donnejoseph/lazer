@@ -1,41 +1,47 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import ProductPage
+import json
+
+
 
 def add_to_cart(request, product_id):
     """Добавление товара в корзину."""
-    try:
-        product = ProductPage.objects.get(id=product_id)
-    except ProductPage.DoesNotExist:
-        return JsonResponse({'status': 'error', 'message': 'Товар не найден'}, status=404)
+    if request.method == 'POST':
+        try:
+            product = ProductPage.objects.get(id=product_id)
+        except ProductPage.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Товар не найден'}, status=404)
 
-    cart = request.session.get('cart', {})
+        cart = request.session.get('cart', {})
 
-    # Получаем первое изображение товара
-    first_image = product.images.first()  # Извлекаем первое связанное изображение
-    image_url = first_image.image.url if first_image and first_image.image else None
+        # Получаем данные из запроса
+        data = json.loads(request.body)
+        quantity = data.get('quantity', 1)
 
-    # Добавляем товар в корзину
-    if str(product_id) in cart:
-        cart[str(product_id)]['quantity'] += 1
+        # Добавляем товар в корзину с учетом количества
+        if str(product_id) in cart:
+            cart[str(product_id)]['quantity'] += quantity
+        else:
+            cart[str(product_id)] = {
+                'name': product.title,
+                'price': str(product.price),
+                'quantity': quantity,
+                'image': product.images.first().image.url if product.images.first() else ''
+            }
+
+        request.session['cart'] = cart
+
+        # Обновляем общее количество товаров в корзине
+        cart_total_quantity = sum(item['quantity'] for item in cart.values())
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Товар добавлен в корзину',
+            'cart_total_quantity': cart_total_quantity
+        })
     else:
-        cart[str(product_id)] = {
-            'name': product.title,
-            'price': str(product.price),
-            'quantity': 1,
-            'image': image_url
-        }
-
-    request.session['cart'] = cart
-
-    # Обновляем общее количество товаров в корзине
-    cart_total_quantity = sum(item['quantity'] for item in cart.values())
-
-    return JsonResponse({
-        'status': 'success',
-        'message': 'Товар добавлен в корзину',
-        'cart_total_quantity': cart_total_quantity
-    })
+        return JsonResponse({'status': 'error', 'message': 'Недопустимый метод запроса'}, status=400)
 
 
 def view_cart(request):
@@ -73,6 +79,10 @@ def update_cart(request, product_id, action):
         elif action == 'decrease' and cart[str(product_id)]['quantity'] > 1:
             cart[str(product_id)]['quantity'] -= 1
 
+        # Получаем обновленные данные
+        new_quantity = cart[str(product_id)]['quantity']
+        price = float(cart[str(product_id)]['price'])  # Цена за единицу товара
+
         request.session['cart'] = cart
 
         # Подсчитываем итоговую стоимость и количество товаров
@@ -81,9 +91,13 @@ def update_cart(request, product_id, action):
 
         return JsonResponse({
             'success': True,
+            'new_quantity': new_quantity,
+            'price': price,
             'cart_total_quantity': cart_total_quantity,
             'cart_total': cart_total
         })
     else:
         return JsonResponse({'success': False, 'message': 'Товар не найден в корзине'}, status=404)
+
+
 

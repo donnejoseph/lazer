@@ -110,6 +110,7 @@ body {
     text-transform: uppercase;
     padding-top: 37px;
     display: inline-block;
+    margin-right: 195px;
 }
 
 .navbar-top-number {
@@ -1240,6 +1241,7 @@ footer {
 }
 
 .footer-vidget {
+display: none;
     position: absolute;
     top: -35px;
     right: 6px;
@@ -1331,7 +1333,7 @@ footer {
 /*--Карточка товара в листинге --*/
 
 .product-items-section-5 {
-    margin-bottom: 120px;
+    margin-bottom: 60px;
 }
 
 /* Заголовок секции товаров */
@@ -2608,6 +2610,10 @@ footer {
         text-align: center;
     }
 
+    .navbar-top-text{
+        margin-right: 0px;
+    }
+
     .shopping-cart .product-count-box {
         right: 0;
         /* Подравнивание позиции */
@@ -2950,7 +2956,7 @@ footer {
     }
 
     .carousel-price {
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .item h4 {
@@ -3023,10 +3029,35 @@ footer {
     .tovars-card-price-before {
         font-size: 14px;
     }
-    
+
+    .navbar-top-text {
+    margin-right: 55px;
+}
+
+.dosky,
+ .panno,
+ .upakovka{
+    width: 230px;
+    }
+
+
+.pazly {
+    width: 350px;
+
+    }
+
+    .catalog-section-top-row {
+        margin-bottom: 10px;
+    }
+
+    .product-items-title  {
+        margin-bottom: 30px;
+    }
 
 
 }
+
+
 
 @media (min-width: 1422.22px) and (max-width: 1600px) {
 

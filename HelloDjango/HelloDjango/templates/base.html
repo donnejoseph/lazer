@@ -1,5 +1,6 @@
 {% load static wagtailimages_tags wagtailcore_tags %}
 {% load custom_tags %}
+{% csrf_token %}
 
 
 <!DOCTYPE html>
@@ -41,6 +42,7 @@
                         {% if cart_total_quantity > 0 %}
                             <span class="cart-quantity-badge">{{ cart_total_quantity }}</span>
                         {% endif %}
+
                     </a>
                 </div>
 
