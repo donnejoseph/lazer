@@ -1,106 +1,47 @@
+{% load static wagtailimages_tags %}
 <section class="reviews-section">
     <div class="container reviews-container">
         <h2 class="reviews-title text-left">Отзывы</h2>
-
-        <!-- Top Row -->
-        <div class="row reviews-top-row">
-            <div class="col-md-4 col-12">
-                <div class="reviews-video-zaglushka-1">
-                    <video id="reviewsVideo1" width="100%" height="100%">
-                        <source src="{{ '/static/video/random-video.mp4' }}" type="video/mp4" />
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <div class="play" id="playButton1">
-                        <img src="{{ '/static/img/play.svg' }}" class="play-img" alt="Play" width="49" height="49" />
+        <div class="row">
+            {% for review in reviews %}
+            <div class="col-md-4 col-12 mb-4">
+                <div class="review-item">
+                    {% if review.video %}
+                    <!-- Если есть видео, отображаем его -->
+                    <div class="video-wrapper">
+                        <video width="100%" height="100%" controls>
+                            <source src="{{ review.video }}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-12">
-                <div class="reviews-video-zaglushka-1">
-                    <video id="reviewsVideo2" width="100%" height="100%">
-                        <source src="{{ '/static/video/random-video.mp4' }}" type="video/mp4" />
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <div class="play" id="playButton2">
-                        <img src="{{ '/static/img/play.svg' }}" class="play-img" alt="Play" width="49" height="49" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-12">
-                <div class="row align-items-center reviews-right-row">
-                    <div class="col-md-7 col-12">
+                    {% elif review.photo %}
+                    <!-- Если есть фото, отображаем его -->
+                    {% image review.photo fill-300x300 %}
+                    {% endif %}
+                    <div class="review-content">
+                        <!-- Остальной контент отзыва -->
                         <div class="reviews-stars">
-                            <!-- SVG звезды -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="69" height="13" viewBox="0 0 69 13" fill="none">
-                                <path d="M6.5 0L7.95934 4.49139H12.6819L8.86126 7.26722L10.3206 11.7586L6.5 8.98278L2.6794 11.7586L4.13874 7.26722L0.318133 4.49139H5.04066L6.5 0Z" fill="#CE8A37"/>
-                                <path d="M20.5 0L21.9593 4.49139H26.6819L22.8613 7.26722L24.3206 11.7586L20.5 8.98278L16.6794 11.7586L18.1387 7.26722L14.3181 4.49139H19.0407L20.5 0Z" fill="#CE8A37"/>
-                                <path d="M34.5 0L35.9593 4.49139H40.6819L36.8613 7.26722L38.3206 11.7586L34.5 8.98278L30.6794 11.7586L32.1387 7.26722L28.3181 4.49139H33.0407L34.5 0Z" fill="#CE8A37"/>
-                                <path d="M48.5 0L49.9593 4.49139H54.6819L50.8613 7.26722L52.3206 11.7586L48.5 8.98278L44.6794 11.7586L46.1387 7.26722L42.3181 4.49139H47.0407L48.5 0Z" fill="#CE8A37"/>
-                                <path d="M62.5 0L63.9593 4.49139H68.6819L64.8613 7.26722L66.3206 11.7586L62.5 8.98278L58.6794 11.7586L60.1387 7.26722L56.3181 4.49139H61.0407L62.5 0Z" fill="#CE8A37"/>
-                              </svg>
-                                <path d="M6.5 0L7.95934 4.49139H12.6819L8.86126 7.26722L10.3206 11.7586L6.5 8.98278L2.6794 11.7586L4.13874 7.26722L0.318133 4.49139H5.04066L6.5 0Z" fill="#CE8A37" />
-                                <!-- Другие звезды -->
-                            </svg>
+                            {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %} <!-- SVG заполненной звезды -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#CE8A37">
+                                    <!-- Ваш SVG код заполненной звезды -->
+                                </svg>
+                                {% else %}
+                                <!-- SVG пустой звезды -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#E0E0E0">
+                                    <!-- Ваш SVG код пустой звезды -->
+                                </svg>
+                                {% endif %}
+                                {% endfor %}
                         </div>
-                        <p class="reviews-text-1">
-                            Заказывала к Новому году на подарки несколько подставок с
-                            надписью...
-                        </p>
-                        <span class="reviews-name-1">Анастасия Волкова</span>
-                    </div>
-                    <div class="col-md-5 col-12 d-flex justify-content-end">
-                        <div class="reviews-pfp-1"></div>
+                        <p class="reviews-text">{{ review.text }}</p>
+                        <span class="reviews-name">{{ review.name }}</span>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Bottom Row -->
-        <div class="row reviews-bottom-row">
-            <div class="col-md-8 col-12">
-                <div class="row reviews-right-row align-items-center">
-                    <div class="col-md-9">
-                        <div class="reviews-stars-bottom">
-                            <!-- SVG звезды -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="69" height="13" viewBox="0 0 69 13" fill="none">
-                                <path d="M6.5 0L7.95934 4.49139H12.6819L8.86126 7.26722L10.3206 11.7586L6.5 8.98278L2.6794 11.7586L4.13874 7.26722L0.318133 4.49139H5.04066L6.5 0Z" fill="#CE8A37"/>
-                                <path d="M20.5 0L21.9593 4.49139H26.6819L22.8613 7.26722L24.3206 11.7586L20.5 8.98278L16.6794 11.7586L18.1387 7.26722L14.3181 4.49139H19.0407L20.5 0Z" fill="#CE8A37"/>
-                                <path d="M34.5 0L35.9593 4.49139H40.6819L36.8613 7.26722L38.3206 11.7586L34.5 8.98278L30.6794 11.7586L32.1387 7.26722L28.3181 4.49139H33.0407L34.5 0Z" fill="#CE8A37"/>
-                                <path d="M48.5 0L49.9593 4.49139H54.6819L50.8613 7.26722L52.3206 11.7586L48.5 8.98278L44.6794 11.7586L46.1387 7.26722L42.3181 4.49139H47.0407L48.5 0Z" fill="#CE8A37"/>
-                                <path d="M62.5 0L63.9593 4.49139H68.6819L64.8613 7.26722L66.3206 11.7586L62.5 8.98278L58.6794 11.7586L60.1387 7.26722L56.3181 4.49139H61.0407L62.5 0Z" fill="#CE8A37"/>
-                              </svg>
-                                <path d="M6.5 0L7.95934 4.49139H12.6819L8.86126 7.26722L10.3206 11.7586L6.5 8.98278L2.6794 11.7586L4.13874 7.26722L0.318133 4.49139H5.04066L6.5 0Z" fill="#CE8A37" />
-                                <!-- Другие звезды -->
-                            </svg>
-                        </div>
-                        <p class="reviews-text-2">
-                            Недавно приобрела в LazerZlat деревянную менажницу и
-                            несколько разделочных досок...
-                        </p>
-                        <span class="reviews-name-1">Ирина Андреева</span>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="reviews-pfp-2"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-12 d-flex flex-column align-items-end">
-                <div class="reviews-video-zaglushka-2 mb-3">
-                    <video id="reviewsVideo3" width="100%" height="100%">
-                        <source src="{{ '/static/video/random-video.mp4' }}" type="video/mp4" />
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <div class="play" id="playButton3">
-                        <img src="{{ '/static/img/play.svg' }}" class="play-img" alt="Play" width="49" height="49" />
-                    </div>
-                </div>
-                <button type="button" class="btn reviews-button">
-                    Больше отзывов о нас
-                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none" class="ms-2">
-                        <path d="M1 9.86962L5 5.43481L1 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
+            {% empty %}
+            <p>Отзывов пока нет.</p>
+            {% endfor %}
         </div>
     </div>
 </section>

@@ -6,6 +6,8 @@ from django.template.response import TemplateResponse
 from shop.models import ProductPage, CategoryPage
 from django.db import models
 
+
+
 class HomePage(Page):
     intro = RichTextField(blank=True)
 
@@ -27,6 +29,7 @@ class HomePage(Page):
         context['opt_page'] = OptPage.objects.first() or None
         context['news_page'] = NewsPage.objects.first() or None
         context['about_page'] = AboutPage.objects.first() or None
+        context['reviews'] = Review.objects.all()
         return context
 
     class Meta:
@@ -173,6 +176,11 @@ class StocksFormSnippet(models.Model):
     def __str__(self):
         return self.title
 
+    verbose_name = "Заявка"
+    verbose_name_plural = "Заявки"
+
+
+
 
 class StocksFormSubmission(models.Model):
     """
@@ -211,3 +219,35 @@ class ThankYouPage(Page):
 
     class Meta:
         verbose_name = "Страница благодарности"
+
+
+@register_snippet  # Декоратор, чтобы зарегистрировать модель как сниппет в Wagtail
+class Review(models.Model):
+    """Модель для отзывов клиентов."""
+    name = models.CharField(max_length=255, verbose_name="Имя клиента")
+    text = models.TextField(verbose_name="Текст отзыва")
+    rating = models.PositiveIntegerField(verbose_name="Рейтинг", default=5)
+    photo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Фотография клиента"
+    )
+    video = models.URLField(blank=True, null=True, verbose_name="Ссылка на видео отзыв")
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('text'),
+        FieldPanel('rating'),
+        FieldPanel('photo'),
+        FieldPanel('video'),
+    ]
+
+    def __str__(self):
+        return f"{self.name} - Рейтинг: {self.rating}"
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
