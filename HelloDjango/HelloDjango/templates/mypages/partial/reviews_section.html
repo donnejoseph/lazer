@@ -2,46 +2,116 @@
 <section class="reviews-section">
     <div class="container reviews-container">
         <h2 class="reviews-title text-left">Отзывы</h2>
+
+        <style>
+            .review-item {
+                height: 245px; /* Устанавливаем фиксированную высоту */
+                max-height: 245px;
+                overflow: hidden; /* Скрываем содержимое за пределами высоты */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* Равномерное распределение содержимого */
+                padding: 15px; /* Внутренний отступ */
+                background-color: #fff; /* Фон блока */
+
+
+            }
+
+            .reviews-pfp {
+                width: 104px;
+                height: 104px;
+                border-radius: 50%; /* Делает изображение круглым */
+                background-color: #708759; /* Цвет фона */
+                border: 3px solid #708759; /* Цвет рамки */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden; /* Скрывает содержимое за пределами круга */
+            }
+
+            .reviews-pfp img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Подгоняет изображение под круг */
+            }
+
+            .reviews-name {
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%; /* 12px */
+                color: #708759;
+                margin-top: 10px;
+            }
+
+            .reviews-text {
+                font-size: 12px;
+                line-height: 1.5;
+                color: #333;
+                margin-bottom: 10px;
+                display: -webkit-box;
+                -webkit-line-clamp: 7; /* Ограничиваем текст до 4 строк */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis; /* Добавляем троеточие для длинного текста */
+            }
+
+            .reviews-stars svg {
+                display: inline-block;
+                margin-right: 2px; /* Расстояние между звёздами */
+                vertical-align: middle;
+                width: 13px;
+                height: 13px;
+            }
+        </style>
+
+        <!-- Начало блока отзывов -->
         <div class="row">
             {% for review in reviews %}
-            <div class="col-md-4 col-12 mb-4">
-                <div class="review-item">
-                    {% if review.video %}
-                    <!-- Если есть видео, отображаем его -->
-                    <div class="video-wrapper">
-                        <video width="100%" height="100%" controls>
-                            <source src="{{ review.video }}" type="video/mp4">
-                            Ваш браузер не поддерживает видео.
-                        </video>
-                    </div>
-                    {% elif review.photo %}
-                    <!-- Если есть фото, отображаем его -->
-                    {% image review.photo fill-300x300 %}
-                    {% endif %}
-                    <div class="review-content">
-                        <!-- Остальной контент отзыва -->
-                        <div class="reviews-stars">
-                            {% for i in "12345" %}
-                            {% if forloop.counter <= review.rating %} <!-- SVG заполненной звезды -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#CE8A37">
-                                    <!-- Ваш SVG код заполненной звезды -->
-                                </svg>
-                                {% else %}
-                                <!-- SVG пустой звезды -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#E0E0E0">
-                                    <!-- Ваш SVG код пустой звезды -->
-                                </svg>
-                                {% endif %}
-                                {% endfor %}
+                <div class="{% if forloop.counter|divisibleby:2 %}col-md-6{% else %}col-md-4{% endif %} col-12 mb-4">
+                    <div class="review-item">
+                        <div class="row align-items-center reviews-right-row">
+                            <div class="col-md-7 col-12">
+                                <div class="reviews-stars">
+                                    <!-- Отображение звёзд рейтинга -->
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= review.rating %}
+                                            <!-- SVG заполненной звезды -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#CE8A37">
+                                                <path d="M6.5 0L8.09 4.26L12.5 4.91L9.5 8L10.18 12.5L6.5 10.4L2.82 12.5L3.5 8L0.5 4.91L4.91 4.26L6.5 0Z"/>
+                                            </svg>
+                                        {% else %}
+                                            <!-- SVG пустой звезды -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#E0E0E0">
+                                                <path d="M6.5 0L8.09 4.26L12.5 4.91L9.5 8L10.18 12.5L6.5 10.4L2.82 12.5L3.5 8L0.5 4.91L4.91 4.26L6.5 0Z"/>
+                                            </svg>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="reviews-text">
+                                    {{ review.text }}
+                                </p>
+                                <span class="reviews-name">{{ review.name }}</span>
+                            </div>
+                            <div class="col-md-5 col-12 d-flex justify-content-end">
+                                <div class="reviews-pfp">
+                                    {% if review.photo %}
+                                        {% image review.photo fill-300x300 class="img-fluid" %}
+                                    {% else %}
+                                        <!-- Если фото нет, можно отобразить заглушку -->
+                                        <img src="{% static 'img/default-avatar.png' %}" alt="{{ review.name }}" class="img-fluid">
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                        <p class="reviews-text">{{ review.text }}</p>
-                        <span class="reviews-name">{{ review.name }}</span>
                     </div>
                 </div>
-            </div>
-            {% empty %}
-            <p>Отзывов пока нет.</p>
             {% endfor %}
+            {% if reviews|length == 0 %}
+                <p>Отзывов пока нет.</p>
+            {% endif %}
         </div>
+        <!-- Конец блока отзывов -->
+
     </div>
 </section>
