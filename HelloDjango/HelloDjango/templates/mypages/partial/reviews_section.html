@@ -4,42 +4,41 @@
         <h2 class="reviews-title text-left">Отзывы</h2>
 
         <style>
+            /* Ваши оригинальные стили */
             .review-item {
-                height: 245px; /* Устанавливаем фиксированную высоту */
+                height: 245px;
                 max-height: 245px;
-                overflow: hidden; /* Скрываем содержимое за пределами высоты */
+                overflow: hidden;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between; /* Равномерное распределение содержимого */
-                padding: 15px; /* Внутренний отступ */
-                background-color: #fff; /* Фон блока */
-
-
+                justify-content: space-between;
+                padding: 15px;
+                background-color: #fff;
             }
 
             .reviews-pfp {
                 width: 104px;
                 height: 104px;
-                border-radius: 50%; /* Делает изображение круглым */
-                background-color: #708759; /* Цвет фона */
-                border: 3px solid #708759; /* Цвет рамки */
+                border-radius: 50%;
+                background-color: #708759;
+                border: 3px solid #708759;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                overflow: hidden; /* Скрывает содержимое за пределами круга */
+                overflow: hidden;
             }
 
             .reviews-pfp img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* Подгоняет изображение под круг */
+                object-fit: cover;
             }
 
             .reviews-name {
                 font-size: 12px;
                 font-style: normal;
                 font-weight: 400;
-                line-height: 100%; /* 12px */
+                line-height: 100%;
                 color: #708759;
                 margin-top: 10px;
             }
@@ -50,15 +49,15 @@
                 color: #333;
                 margin-bottom: 10px;
                 display: -webkit-box;
-                -webkit-line-clamp: 7; /* Ограничиваем текст до 4 строк */
+                -webkit-line-clamp: 7;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
-                text-overflow: ellipsis; /* Добавляем троеточие для длинного текста */
+                text-overflow: ellipsis;
             }
 
             .reviews-stars svg {
                 display: inline-block;
-                margin-right: 2px; /* Расстояние между звёздами */
+                margin-right: 2px;
                 vertical-align: middle;
                 width: 13px;
                 height: 13px;
@@ -68,20 +67,29 @@
         <!-- Начало блока отзывов -->
         <div class="row">
             {% for review in reviews %}
-                <div class="{% if forloop.counter|divisibleby:2 %}col-md-6{% else %}col-md-4{% endif %} col-12 mb-4">
+                {% if forloop.counter|add:"-1"|divisibleby:5 and not forloop.first %}
+                    </div>
+                    <div class="row">
+                {% endif %}
+
+                {% if forloop.counter|divisibleby:5 %}
+                    <div class="col-md-8 col-12 mb-4">
+                {% elif forloop.counter|add:"-1"|divisibleby:5 %}
+                    <div class="col-md-4 col-12 mb-4">
+                {% else %}
+                    <div class="col-md-4 col-12 mb-4">
+                {% endif %}
+
                     <div class="review-item">
                         <div class="row align-items-center reviews-right-row">
                             <div class="col-md-7 col-12">
                                 <div class="reviews-stars">
-                                    <!-- Отображение звёзд рейтинга -->
                                     {% for i in "12345" %}
                                         {% if forloop.counter <= review.rating %}
-                                            <!-- SVG заполненной звезды -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#CE8A37">
                                                 <path d="M6.5 0L8.09 4.26L12.5 4.91L9.5 8L10.18 12.5L6.5 10.4L2.82 12.5L3.5 8L0.5 4.91L4.91 4.26L6.5 0Z"/>
                                             </svg>
                                         {% else %}
-                                            <!-- SVG пустой звезды -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#E0E0E0">
                                                 <path d="M6.5 0L8.09 4.26L12.5 4.91L9.5 8L10.18 12.5L6.5 10.4L2.82 12.5L3.5 8L0.5 4.91L4.91 4.26L6.5 0Z"/>
                                             </svg>
@@ -98,7 +106,6 @@
                                     {% if review.photo %}
                                         {% image review.photo fill-300x300 class="img-fluid" %}
                                     {% else %}
-                                        <!-- Если фото нет, можно отобразить заглушку -->
                                         <img src="{% static 'img/default-avatar.png' %}" alt="{{ review.name }}" class="img-fluid">
                                     {% endif %}
                                 </div>
