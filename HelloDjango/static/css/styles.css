@@ -2226,9 +2226,7 @@ display: none;
 }
 
 .tovars-card-img {
-    width: 100%;
-    /* Полная ширина */
-    height: 440px;
+    height: 465px;
     /* Фиксированная высота для главного изображения */
     object-fit: cover;
     /* Масштабирует изображение, сохраняя пропорции, и обрезает, если нужно */
@@ -2487,8 +2485,23 @@ display: none;
 }
 
 .tab-pane {
-    margin-top: -50px;
+    margin-top: -40px;
 }
+.tab-content.custom-tab-content {
+    max-height: 300px; /* или подходящая высота */
+    overflow-y: auto;
+}
+.container.tovar-description {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Полный доступный размер */
+}
+
+.row.tovars-card-bottom-row {
+    margin-top: auto; /* Прижимает к низу */
+}
+
+
 
 .thank-you-section .best-sellers-section{
     margin-bottom: 0px;
