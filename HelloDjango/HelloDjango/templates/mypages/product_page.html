@@ -4,9 +4,9 @@
 <section>
     <div class="container tovar-description">
         <div class="row">
-            <div class="col-1">
+            <div class="col-md-1 col-3 img-gallery-col">
                 <div class="image-gallery d-flex flex-column">
-                    {% for image in page.images.all %}
+                    {% for image in page.images.all|slice:":5" %}
                     <div class="gallery-item" onclick="changeMainImage('{{ image.image.url }}')">
                         <img src="{{ image.image.url }}" class="tovars-card-mini-img" alt="Изображение {{ page.title }}">
                     </div>
@@ -20,7 +20,7 @@
                  onclick="openImageModal()">
 
             </div>
-            <div class="col-7 d-flex flex-column">
+            <div class="col-md-7 col-12 d-flex flex-column">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tovars-card-title">{{ page.title }}</h2>
