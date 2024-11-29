@@ -257,3 +257,22 @@ function getCorrectWord(number, words) {
             : cases[Math.min(number % 10, 5)]
     ];
 }
+
+
+function openImageModal() {
+    const mainImage = document.getElementById("main-image");
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+
+    if (mainImage && modal && modalImage) {
+        modal.style.display = "block";
+        modalImage.src = mainImage.src;
+    }
+}
+
+function closeImageModal() {
+    const modal = document.getElementById("image-modal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}

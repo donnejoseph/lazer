@@ -1498,7 +1498,7 @@ display: none;
 
 /* Стиль содержимого модального окна */
 .modal-content {
-    background-color: #fff;
+    background-color: #343a40;
     padding: 20px;
     border-radius: 5px;
     width: 80%;
@@ -2258,7 +2258,7 @@ display: none;
 }
 
 .image-gallery {
-    height: 100%;
+    height: 98%;
     /* Высота галереи */
     display: flex;
     flex-direction: column;
@@ -2293,6 +2293,49 @@ display: none;
 .tovars-card-img {
     width: 100%;
 }
+
+
+
+.image-modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(1, 1, 1, 0.9);
+}
+
+.image-modal .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%; /* Уменьшение, чтобы сохранить рамки */
+    max-height: 90%; /* Уменьшение, чтобы сохранить рамки */
+    object-fit: contain; /* Сохраняем пропорции */
+}
+
+.image-modal .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.image-modal .close-modal:hover,
+.image-modal .close-modal:focus {
+    color: #ccc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
 
 .tovars-card-title {
     margin-bottom: 28px;

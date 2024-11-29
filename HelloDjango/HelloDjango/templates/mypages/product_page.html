@@ -14,7 +14,11 @@
                 </div>
             </div>
             <div class="col-md-4 col-9">
-                <img id="main-image" src="{% if page.images.first %}{{ page.images.first.image.url }}{% endif %}" class="tovars-card-img" alt="{{ page.title }}">
+                <img id="main-image" src="{% if page.images.first %}{{ page.images.first.image.url }}{% endif %}"
+                 class="tovars-card-img"
+                 alt="{{ page.title }}"
+                 onclick="openImageModal()">
+
             </div>
             <div class="col-7 d-flex flex-column">
                 <div class="row">
@@ -66,6 +70,12 @@
             </div>
         </div>
     </div>
+
+    <div id="image-modal" class="image-modal">
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+    <img class="modal-content" id="modal-image">
+    </div>
+
 </section>
 <script>
 function addToCart(productId) {
