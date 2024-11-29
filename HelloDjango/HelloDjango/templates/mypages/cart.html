@@ -47,12 +47,14 @@
             <div class="row">
                 <div class="col-md-7 col-0"></div>
                 <div class="col-md-5 col-12 korzina-custom-col">
-                    <span class="korzina-total-text">
-                        Итого
-                    </span>
-                    <span class="korzina-total-price-text">
+                    <div class="row align-items-center">
+                        <div class="col-6 korzina-total-text text-start">
+                            Итого
+                        </div>
+                    <div class="col-6 korzina-total-price-text  text-end">
                         {{ cart_total|floatformat:2 }} р.
-                    </span>
+                    </div>
+                    </div>
                     <button type="button" class="btn btn-primary korzina-button">
                         оформить заказ
                     </button>
