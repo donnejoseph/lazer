@@ -276,3 +276,24 @@ function closeImageModal() {
         modal.style.display = "none";
     }
 }
+
+
+function openImageModalOnHover() {
+    const mainImage = document.getElementById("main-image");
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+
+    if (mainImage && modal && modalImage) {
+        mainImage.addEventListener("mouseenter", () => {
+            modal.style.display = "block";
+            modalImage.src = mainImage.src;
+        });
+
+        modal.addEventListener("mouseleave", () => {
+            modal.style.display = "none";
+        });
+    }
+}
+
+// Вызываем функцию для установки обработчиков
+openImageModalOnHover();
